@@ -87,48 +87,119 @@ database:
       use_parallel_runtime: ${USE_PARALLEL_RUNTIME:false}
 
 graphiti:
-  group_id: ${GRAPHITI_GROUP_ID:main}
+  # Name of the shared PUBLIC graph (scope='public'). Tools no longer accept a raw
+  # group_id: scope='private' resolves to a per-user graph (the X-Graphiti-User header
+  # value, or 'anonymous'). Override the header name with GRAPHITI_USER_HEADER.
+  group_id: ${GRAPHITI_GROUP_ID:default_db}
   episode_id_prefix: ${EPISODE_ID_PREFIX:}
   user_id: ${USER_ID:mcp_user}
+  # ESG / non-financial analysis ontology. Names matching a model registered in
+  # src/models/entity_types.py use the rich Pydantic model (with extractable
+  # fields); otherwise a documentation-only model is built from the description.
   entity_types:
-    - name: "Preference"
-      description: "User preferences, choices, opinions, or selections (PRIORITIZE over most other types except User/Assistant)"
-    - name: "Requirement"
-      description: "Specific needs, features, or functionality that must be fulfilled"
-    - name: "Procedure"
-      description: "Standard operating procedures and sequential instructions"
-    - name: "Location"
-      description: "Physical or virtual places where activities occur"
-    - name: "Event"
-      description: "Time-bound activities, occurrences, or experiences"
     - name: "Organization"
-      description: "Companies, institutions, groups, or formal entities"
+      description: "A company, institution, regulator, investor, supplier, or NGO referenced as a formal entity (usually the reporting company being analyzed)"
+    - name: "ESGTopic"
+      description: "A material environmental, social, or governance topic (e.g. climate change, emissions, water, human rights, diversity, board composition, business ethics)"
+    - name: "Regulation"
+      description: "A mandatory ESG / non-financial reporting law, rule, or directive (e.g. CSRD, EU Taxonomy, SEC climate disclosure)"
+    - name: "Framework"
+      description: "A voluntary ESG reporting framework, standard, or rating scheme (e.g. GRI, SASB, TCFD, ISSB, CDP, SBTi)"
+    - name: "Risk"
+      description: "An ESG-related risk to an organization (physical, transition, regulatory, reputational, supply-chain, human-rights)"
+    - name: "Commitment"
+      description: "A sustainability target, pledge, or goal (e.g. net-zero by 2050, emissions cut, diversity target)"
+    - name: "Metric"
+      description: "An ESG KPI, indicator, or quantitative measure (e.g. Scope 1/2/3 emissions, gender pay gap, board independence)"
+    - name: "Policy"
+      description: "A corporate policy, governance practice, or management approach (e.g. code of conduct, environmental policy, supplier code)"
+    - name: "Stakeholder"
+      description: "A group with an interest in the organization's ESG performance (investors, regulators, employees, communities, customers, suppliers, NGOs)"
     - name: "Document"
-      description: "Information content in various forms (books, articles, reports, etc.)"
-    - name: "Topic"
-      description: "Subject of conversation, interest, or knowledge domain (use as last resort)"
+      description: "A sustainability report, annual report, disclosure, regulatory filing, or published guidance"
+    - name: "Event"
+      description: "A time-bound ESG occurrence (controversy, incident, disclosure, audit, AGM, regulatory action)"
     - name: "Person"
-      description: "An individual human referenced in the content"
-    - name: "Object"
-      description: "Physical items, tools, devices, or possessions (use as last resort)"
+      description: "An individual human referenced in the content (executive, board member, sustainability officer, regulator)"
 
-  # Optional edge (fact) types. When a name matches a model registered in
+  # Edge (fact) types. When a name matches a model registered in
   # src/models/edge_types.py the rich Pydantic model is used; otherwise a
-  # documentation-only model is built from the description below. Leave this
-  # list empty to keep graphiti-core's default edge extraction behavior.
-  # edge_types:
-  #   - name: "WorksFor"
-  #     description: "Employment or membership of a person in an organization"
-  #   - name: "LocatedAt"
-  #     description: "An entity is situated at or within a location"
+  # documentation-only model is built from the description below.
+  edge_types:
+    - name: "Discloses"
+      description: "An organization reports or discloses a metric, topic, or data point"
+    - name: "CommitsTo"
+      description: "An organization commits to a sustainability target, pledge, or goal"
+    - name: "SubjectTo"
+      description: "An organization is governed by or subject to a regulation"
+    - name: "ReportsUnder"
+      description: "An organization reports under, aligns with, or is rated by a voluntary framework"
+    - name: "Faces"
+      description: "An organization is exposed to or faces an ESG-related risk"
+    - name: "Addresses"
+      description: "A policy or commitment addresses, manages, or mitigates an ESG topic or risk"
+    - name: "MaterialTo"
+      description: "An ESG topic is material or relevant to an organization or its sector"
+    - name: "Impacts"
+      description: "An organization's activity impacts a stakeholder or ESG topic"
+    - name: "Engages"
+      description: "An organization engages, consults, or interacts with a stakeholder"
+    - name: "Measures"
+      description: "A metric measures or quantifies an ESG topic"
+    - name: "Requires"
+      description: "A regulation or framework requires a disclosure, metric, or action"
+    - name: "MentionedIn"
+      description: "An entity is referenced, described, or discussed within a document"
 
-  # Optional constraint on which edge types may connect which entity types.
+  # Constraint on which edge types may connect which entity types.
   # 'Entity' acts as a wildcard for either endpoint. Mirrors graphiti-core's
-  # edge_type_map. Leave empty to allow any configured edge type anywhere.
-  # edge_type_map:
-  #   - source: "Person"
-  #     target: "Organization"
-  #     edge_types: ["WorksFor"]
-  #   - source: "Entity"
-  #     target: "Location"
-  #     edge_types: ["LocatedAt"]
+  # edge_type_map.
+  edge_type_map:
+    - source: "Organization"
+      target: "Metric"
+      edge_types: ["Discloses"]
+    - source: "Organization"
+      target: "ESGTopic"
+      edge_types: ["Discloses"]
+    - source: "Organization"
+      target: "Commitment"
+      edge_types: ["CommitsTo"]
+    - source: "Organization"
+      target: "Regulation"
+      edge_types: ["SubjectTo"]
+    - source: "Organization"
+      target: "Framework"
+      edge_types: ["ReportsUnder"]
+    - source: "Organization"
+      target: "Risk"
+      edge_types: ["Faces"]
+    - source: "Organization"
+      target: "Stakeholder"
+      edge_types: ["Impacts", "Engages"]
+    - source: "Policy"
+      target: "ESGTopic"
+      edge_types: ["Addresses"]
+    - source: "Policy"
+      target: "Risk"
+      edge_types: ["Addresses"]
+    - source: "Commitment"
+      target: "ESGTopic"
+      edge_types: ["Addresses"]
+    - source: "Commitment"
+      target: "Risk"
+      edge_types: ["Addresses"]
+    - source: "ESGTopic"
+      target: "Organization"
+      edge_types: ["MaterialTo"]
+    - source: "Metric"
+      target: "ESGTopic"
+      edge_types: ["Measures"]
+    - source: "Regulation"
+      target: "Metric"
+      edge_types: ["Requires"]
+    - source: "Framework"
+      target: "Metric"
+      edge_types: ["Requires"]
+    - source: "Entity"
+      target: "Document"
+      edge_types: ["MentionedIn"]
