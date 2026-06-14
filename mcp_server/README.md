@@ -18,7 +18,7 @@ The Graphiti MCP server provides comprehensive knowledge graph capabilities:
 - **Episode Management**: Add, retrieve, and delete episodes (text, messages, or JSON data)
 - **Entity Management**: Search and manage entity nodes and relationships in the knowledge graph
 - **Search Capabilities**: Search for facts (edges) and node summaries using semantic and hybrid search
-- **Group Management**: Organize and manage groups of related data with group_id filtering
+- **Public/Private Scopes**: Every tool takes a `scope` of `public` (shared `default_db` graph) or `private` (the caller's own graph, keyed by the `X-Graphiti-User` header, or `anonymous`)
 - **Graph Maintenance**: Clear the graph and rebuild indices
 - **Graph Database Support**: Multiple backend options including FalkorDB (default) and Neo4j
 - **Multiple LLM Providers**: Support for OpenAI, Anthropic, Gemini, Groq, and Azure OpenAI
@@ -333,7 +333,7 @@ uv run main.py --config config/config-docker-falkordb.yaml
 - `--model`: Model name to use with the LLM client
 - `--temperature`: Temperature setting for the LLM (0.0-2.0)
 - `--transport`: Choose the transport method (http or stdio, default: http)
-- `--group-id`: Set a namespace for the graph (optional). If not provided, defaults to "main"
+- `--group-id`: Name of the shared PUBLIC graph (optional, defaults to "default_db"). This only sets the public scope; private scopes resolve per-user from the `X-Graphiti-User` request header (or "anonymous"). Tools no longer accept raw group ids — callers choose `scope=public|private` instead.
 - `--destroy-graph`: If set, destroys all Graphiti graphs on startup
 
 ### Concurrency and LLM Provider 429 Rate Limit Errors
@@ -597,7 +597,7 @@ To integrate the Graphiti MCP Server with the Cursor IDE, follow these steps:
 uv run main.py --group-id <your_group_id>
 ```
 
-Hint: specify a `group_id` to namespace graph data. If you do not specify a `group_id`, the server will use "main" as the group_id.
+Hint: `--group-id` names the shared **public** graph (defaults to "default_db"). Callers select data with each tool's `scope` parameter: `scope='public'` for shared knowledge, `scope='private'` for the caller's own graph (resolved from the `X-Graphiti-User` header, or "anonymous"). The server only ever creates these graphs — ad-hoc group ids are no longer possible.
 
 or
 

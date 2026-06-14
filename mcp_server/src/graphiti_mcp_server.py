@@ -19,7 +19,7 @@ from graphiti_core.edges import EntityEdge
 from graphiti_core.nodes import EntityNode, EpisodeType, SagaNode
 from graphiti_core.search.search_filters import SearchFilters
 from graphiti_core.utils.maintenance.graph_data_operations import clear_data
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import Context, FastMCP
 from pydantic import BaseModel
 from starlette.responses import JSONResponse
 
@@ -40,12 +40,12 @@ from models.response_types import (
 from services.factories import DatabaseDriverFactory, EmbedderFactory, LLMClientFactory
 from services.queue_service import QueueService
 from utils.formatting import format_fact_result, to_edge_result, to_node_result
+from utils.scope import Scope, resolve_group_id, validate_group_id
 from utils.type_config import (
     build_edge_type_map,
     build_edge_types,
     build_entity_types,
     build_fact_search_filters,
-    coerce_group_ids,
     parse_reference_time,
 )
 
@@ -132,8 +132,15 @@ Graphiti is a memory service for AI agents built on a temporally-aware knowledge
 well with dynamic data such as user interactions, changing enterprise data, and external information.
 
 Graphiti organizes data as episodes (content snippets), nodes (entities), and facts (relationships
-between entities). Each piece of information is partitioned by group_id, so you can maintain separate
-knowledge domains in one graph.
+between entities). Knowledge is split into two scopes that map to separate graphs.
+
+scope policy: every tool takes a `scope` of 'public' or 'private'.
+- 'private' (the default) targets the current user's own graph — their username, or "anonymous"
+  when no user is identified. Use it for user-specific memory.
+- 'public' targets the shared "default_db" graph that everyone reads and writes. Use it only for
+  general, shareable knowledge.
+Tools never accept a raw group_id; the graph is always derived from scope + the request's identity,
+so you cannot create ad-hoc namespaces.
 
 Bi-temporal model: every episode records both when it was ingested and when the events it describes
 actually occurred. Pass reference_time to add_memory to set the event-occurrence time; otherwise the
@@ -156,15 +163,16 @@ Core tools:
 - get_episode_entities: trace provenance — the entities and facts created by specific episode UUIDs.
 - get_entity_edge / get_episodes: retrieve specific facts or episodes.
 - delete_episode: remove an episode and cascade-delete the entities/facts it solely created.
-- delete_entity_edge / clear_graph: remove a fact, or clear a group's data.
+- delete_entity_edge / clear_graph: remove a fact, or clear a scope's data.
 
 Custom types: the server can register rich entity-type and edge-type models (with attributes and
 extraction instructions) from configuration, and constrain which edge types are allowed between which
 entity types via an edge_type_map. With no such configuration, default extraction behavior applies.
 
 When adding information, provide descriptive names and detailed content to improve search quality.
-When searching, use specific queries and consider filtering by group_id, type, or date range. The
-server requires a configured database and valid API keys for language-model operations.
+When searching, use specific queries; search scope='private' for the current user's own memory and
+scope='public' for shared knowledge. You may also filter by type or date range.
+The server requires a configured database and valid API keys for language-model operations.
 """
 
 # MCP server instance
@@ -337,12 +345,32 @@ class GraphitiService:
             raise RuntimeError('Failed to initialize Graphiti client')
         return self.client
 
+    async def use_group(self, group_id: str) -> Graphiti:
+        """Return the client with its driver pointed at ``group_id``'s graph.
+
+        For FalkorDB each group_id is a separate physical graph, so reads, deletes
+        and UUID lookups must target the right graph — not just the shared default.
+        This mirrors what graphiti-core itself does on ``add_episode`` (see
+        ``Graphiti.add_episode``): clone the driver onto the target database and
+        swap it in. For Neo4j ``clone`` is a no-op (group_id is a property filter),
+        so this is safe across providers.
+
+        Single-process pattern; the shared driver is mutated in place. Writes are
+        already serialized per group by the queue service.
+        """
+        client = await self.get_client()
+        if group_id != client.driver._database:
+            client.driver = client.driver.clone(database=group_id)
+            client.clients.driver = client.driver
+        return client
+
 
 @mcp.tool()
 async def add_memory(
     name: str,
     episode_body: str,
-    group_id: str | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
     source: str = 'text',
     source_description: str = '',
     uuid: str | None = None,
@@ -368,8 +396,11 @@ async def add_memory(
         episode_body (str): The content of the episode to persist to memory. When source='json', this must be a
                            properly escaped JSON string, not a raw Python dictionary. The JSON data will be
                            automatically processed to extract entities and relationships.
-        group_id (str, optional): A unique ID for this graph. If not provided, uses the default group_id from CLI
-                                 or a generated one.
+        scope ('public' | 'private', optional): Which graph to write to. 'private' (default) writes to
+                                 the current user's own graph (their username, or "anonymous" when no
+                                 user is identified). 'public' writes to the shared "default_db" graph
+                                 that everyone reads/writes. Use 'public' only for general, shareable
+                                 knowledge; use 'private' for user-specific memory.
         source (str, optional): Source type, must be one of:
                                - 'text': For plain text content (default)
                                - 'json': For structured data
@@ -394,13 +425,21 @@ async def add_memory(
                                  order episodes within the saga.
 
     Examples:
-        # Adding plain text content
+        # Adding shareable general knowledge to the public graph
         add_memory(
             name="Company News",
             episode_body="Acme Corp announced a new product line today.",
+            scope="public",
             source="text",
-            source_description="news article",
-            group_id="some_arbitrary_string"
+            source_description="news article"
+        )
+
+        # Adding user-specific memory to the caller's private graph (default)
+        add_memory(
+            name="Alice Preference",
+            episode_body="Alice prefers dark mode and concise summaries.",
+            source="text",
+            source_description="user preference",
         )
 
         # Adding structured JSON data
@@ -432,8 +471,9 @@ async def add_memory(
         return ErrorResponse(error=f'Invalid reference_time: {e}')
 
     try:
-        # Use the provided group_id or fall back to the default from config
-        effective_group_id = group_id or config.graphiti.group_id
+        # Resolve scope + request identity to a single allowed graph name.
+        effective_group_id = resolve_group_id(scope, ctx)
+        validate_group_id(effective_group_id, ctx)
 
         # Try to parse the source as an EpisodeType enum, with fallback to text
         episode_type = EpisodeType.text  # Default
@@ -477,7 +517,8 @@ async def add_memory(
 @mcp.tool()
 async def search_nodes(
     query: str,
-    group_ids: str | list[str] | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
     max_nodes: int = 10,
     entity_types: list[str] | None = None,
     center_node_uuid: str | None = None,
@@ -486,8 +527,9 @@ async def search_nodes(
 
     Args:
         query: The search query
-        group_ids: Optional group ID, or list of group IDs, to filter results (a single
-            string is accepted and treated as a one-element list)
+        scope ('public' | 'private', optional): Which graph to search. 'private' (default)
+            searches the current user's own graph; 'public' searches the shared "default_db"
+            graph. A single search covers one graph at a time.
         max_nodes: Maximum number of nodes to return (default: 10)
         entity_types: Optional list of entity type names (node labels) to filter by
         center_node_uuid: Optional UUID of a node to center the search around. Results
@@ -499,17 +541,10 @@ async def search_nodes(
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
-
-        # Accept a scalar group_id or a list; fall back to the default when omitted.
-        group_ids = coerce_group_ids(group_ids)
-        effective_group_ids = (
-            group_ids
-            if group_ids is not None
-            else [config.graphiti.group_id]
-            if config.graphiti.group_id
-            else []
-        )
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
+        effective_group_ids = [group_id]
 
         # Create search filters
         search_filters = SearchFilters(
@@ -554,7 +589,8 @@ async def search_nodes(
 @mcp.tool()
 async def search_memory_facts(
     query: str,
-    group_ids: str | list[str] | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
     max_facts: int = 10,
     center_node_uuid: str | None = None,
     edge_types: list[str] | None = None,
@@ -567,8 +603,9 @@ async def search_memory_facts(
 
     Args:
         query: The search query
-        group_ids: Optional group ID, or list of group IDs, to filter results (a single
-            string is accepted and treated as a one-element list)
+        scope ('public' | 'private', optional): Which graph to search. 'private' (default)
+            searches the current user's own graph; 'public' searches the shared "default_db"
+            graph. A single search covers one graph at a time.
         max_facts: Maximum number of facts to return (default: 10)
         center_node_uuid: Optional UUID of a node to center the search around
         edge_types: Optional list of edge (fact) type names to filter by
@@ -600,17 +637,10 @@ async def search_memory_facts(
         except ValueError as e:
             return ErrorResponse(error=f'Invalid date filter: {e}')
 
-        client = await graphiti_service.get_client()
-
-        # Accept a scalar group_id or a list; fall back to the default when omitted.
-        group_ids = coerce_group_ids(group_ids)
-        effective_group_ids = (
-            group_ids
-            if group_ids is not None
-            else [config.graphiti.group_id]
-            if config.graphiti.group_id
-            else []
-        )
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
+        effective_group_ids = [group_id]
 
         relevant_edges = await client.search(
             group_ids=effective_group_ids,
@@ -632,11 +662,15 @@ async def search_memory_facts(
 
 
 @mcp.tool()
-async def delete_entity_edge(uuid: str) -> SuccessResponse | ErrorResponse:
+async def delete_entity_edge(
+    uuid: str, ctx: Context, scope: Scope = 'private'
+) -> SuccessResponse | ErrorResponse:
     """Delete an entity edge from the graph memory.
 
     Args:
         uuid: UUID of the entity edge to delete
+        scope ('public' | 'private', optional): Which graph the edge lives in. 'private'
+            (default) targets the current user's own graph; 'public' targets "default_db".
     """
     global graphiti_service
 
@@ -644,7 +678,9 @@ async def delete_entity_edge(uuid: str) -> SuccessResponse | ErrorResponse:
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
         # Get the entity edge by UUID
         entity_edge = await EntityEdge.get_by_uuid(client.driver, uuid)
@@ -658,7 +694,9 @@ async def delete_entity_edge(uuid: str) -> SuccessResponse | ErrorResponse:
 
 
 @mcp.tool()
-async def delete_episode(uuid: str) -> SuccessResponse | ErrorResponse:
+async def delete_episode(
+    uuid: str, ctx: Context, scope: Scope = 'private'
+) -> SuccessResponse | ErrorResponse:
     """Delete an episode from the graph memory.
 
     Uses Graphiti.remove_episode, which cascades the deletion: entities and facts
@@ -667,6 +705,8 @@ async def delete_episode(uuid: str) -> SuccessResponse | ErrorResponse:
 
     Args:
         uuid: UUID of the episode to delete
+        scope ('public' | 'private', optional): Which graph the episode lives in. 'private'
+            (default) targets the current user's own graph; 'public' targets "default_db".
     """
     global graphiti_service
 
@@ -674,7 +714,9 @@ async def delete_episode(uuid: str) -> SuccessResponse | ErrorResponse:
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
         # remove_episode cascades cleanup of episode-created entities/edges,
         # unlike EpisodicNode.delete which would orphan them.
@@ -687,11 +729,15 @@ async def delete_episode(uuid: str) -> SuccessResponse | ErrorResponse:
 
 
 @mcp.tool()
-async def get_entity_edge(uuid: str) -> dict[str, Any] | ErrorResponse:
+async def get_entity_edge(
+    uuid: str, ctx: Context, scope: Scope = 'private'
+) -> dict[str, Any] | ErrorResponse:
     """Get an entity edge from the graph memory by its UUID.
 
     Args:
         uuid: UUID of the entity edge to retrieve
+        scope ('public' | 'private', optional): Which graph the edge lives in. 'private'
+            (default) targets the current user's own graph; 'public' targets "default_db".
     """
     global graphiti_service
 
@@ -699,7 +745,9 @@ async def get_entity_edge(uuid: str) -> dict[str, Any] | ErrorResponse:
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
         # Get the entity edge directly using the EntityEdge class method
         entity_edge = await EntityEdge.get_by_uuid(client.driver, uuid)
@@ -715,14 +763,15 @@ async def get_entity_edge(uuid: str) -> dict[str, Any] | ErrorResponse:
 
 @mcp.tool()
 async def get_episodes(
-    group_ids: str | list[str] | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
     max_episodes: int = 10,
 ) -> EpisodeSearchResponse | ErrorResponse:
     """Get episodes from the graph memory.
 
     Args:
-        group_ids: Optional group ID, or list of group IDs, to filter results (a single
-            string is accepted and treated as a one-element list)
+        scope ('public' | 'private', optional): Which graph to read. 'private' (default)
+            reads the current user's own graph; 'public' reads the shared "default_db" graph.
         max_episodes: Maximum number of episodes to return (default: 10)
     """
     global graphiti_service
@@ -731,29 +780,16 @@ async def get_episodes(
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
-
-        # Accept a scalar group_id or a list; fall back to the default when omitted.
-        group_ids = coerce_group_ids(group_ids)
-        effective_group_ids = (
-            group_ids
-            if group_ids is not None
-            else [config.graphiti.group_id]
-            if config.graphiti.group_id
-            else []
-        )
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
         # Get episodes from the driver directly
         from graphiti_core.nodes import EpisodicNode
 
-        if effective_group_ids:
-            episodes = await EpisodicNode.get_by_group_ids(
-                client.driver, effective_group_ids, limit=max_episodes
-            )
-        else:
-            # If no group IDs, we need to use a different approach
-            # For now, return empty list when no group IDs specified
-            episodes = []
+        episodes = await EpisodicNode.get_by_group_ids(
+            client.driver, [group_id], limit=max_episodes
+        )
 
         if not episodes:
             return EpisodeSearchResponse(message='No episodes found', episodes=[])
@@ -785,7 +821,7 @@ async def get_episodes(
 
 @mcp.tool()
 async def summarize_saga(
-    saga_name: str, group_id: str | None = None
+    saga_name: str, ctx: Context, scope: Scope = 'private'
 ) -> SagaSummaryResponse | ErrorResponse:
     """Summarize a saga: an ordered group of related episodes.
 
@@ -798,7 +834,8 @@ async def summarize_saga(
 
     Args:
         saga_name: The saga name — the same value passed as ``saga`` to add_memory.
-        group_id: Optional group ID the saga belongs to. Falls back to the default group.
+        scope ('public' | 'private', optional): Which graph the saga lives in. 'private'
+            (default) targets the current user's own graph; 'public' targets "default_db".
     """
     global graphiti_service
 
@@ -806,11 +843,9 @@ async def summarize_saga(
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
-
-        effective_group_id = group_id or config.graphiti.group_id
-        if not effective_group_id:
-            return ErrorResponse(error='No group_id provided and no default group_id is configured')
+        effective_group_id = resolve_group_id(scope, ctx)
+        validate_group_id(effective_group_id, ctx)
+        client = await graphiti_service.use_group(effective_group_id)
 
         # add_memory takes a saga *name*; core keys sagas by (name, group_id) and
         # assigns its own UUID, while summarize_saga requires that UUID. Resolve the
@@ -838,18 +873,19 @@ async def summarize_saga(
 
 @mcp.tool()
 async def build_communities(
-    group_ids: str | list[str] | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
 ) -> BuildCommunitiesResponse | ErrorResponse:
     """Detect and build community summaries over the graph's entities.
 
     Communities group densely-connected entities and produce higher-level summaries
     that can then be searched. This is a relatively expensive operation that
-    processes the full set of entities for the given group(s).
+    processes the full set of entities for the selected graph.
 
     Args:
-        group_ids: Optional group ID, or list of group IDs, to build communities for.
-            Falls back to the default group when omitted. Pass an explicit list to scope
-            community detection across multiple graphs.
+        scope ('public' | 'private', optional): Which graph to build communities for.
+            'private' (default) targets the current user's own graph; 'public' targets
+            the shared "default_db" graph.
     """
     global graphiti_service
 
@@ -857,16 +893,11 @@ async def build_communities(
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
-        # Accept a scalar group_id or a list; fall back to the default when omitted.
-        normalized_group_ids = coerce_group_ids(group_ids)
-        if normalized_group_ids is None and config.graphiti.group_id:
-            normalized_group_ids = [config.graphiti.group_id]
-
-        communities, community_edges = await client.build_communities(
-            group_ids=normalized_group_ids
-        )
+        communities, community_edges = await client.build_communities(group_ids=[group_id])
 
         community_results: list[CommunityResult] = [
             CommunityResult(
@@ -896,7 +927,8 @@ async def add_triplet(
     edge_name: str,
     fact: str,
     target_node_name: str,
-    group_id: str | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
     source_node_uuid: str | None = None,
     target_node_uuid: str | None = None,
 ) -> TripletResponse | ErrorResponse:
@@ -911,7 +943,8 @@ async def add_triplet(
         edge_name: Relationship/edge type name (e.g. "WORKS_FOR")
         fact: Natural-language statement describing the relationship
         target_node_name: Name of the target entity
-        group_id: Optional group ID. Falls back to the default group when omitted.
+        scope ('public' | 'private', optional): Which graph to write to. 'private' (default)
+            targets the current user's own graph; 'public' targets the shared "default_db" graph.
         source_node_uuid: Optional UUID to reuse an existing source entity. A new UUID is
             generated when omitted.
         target_node_uuid: Optional UUID to reuse an existing target entity. A new UUID is
@@ -923,11 +956,9 @@ async def add_triplet(
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
-
-        effective_group_id = group_id or config.graphiti.group_id
-        if not effective_group_id:
-            return ErrorResponse(error='No group_id provided and no default group_id is configured')
+        effective_group_id = resolve_group_id(scope, ctx)
+        validate_group_id(effective_group_id, ctx)
+        client = await graphiti_service.use_group(effective_group_id)
         now = datetime.now(timezone.utc)
 
         source_node = EntityNode(
@@ -967,6 +998,8 @@ async def add_triplet(
 @mcp.tool()
 async def get_episode_entities(
     episode_uuids: list[str],
+    ctx: Context,
+    scope: Scope = 'private',
 ) -> EpisodeEntitiesResponse | ErrorResponse:
     """Get the entities (nodes) and facts (edges) created by specific episodes.
 
@@ -975,6 +1008,8 @@ async def get_episode_entities(
 
     Args:
         episode_uuids: List of episode UUIDs to look up provenance for
+        scope ('public' | 'private', optional): Which graph the episodes live in. 'private'
+            (default) targets the current user's own graph; 'public' targets "default_db".
     """
     global graphiti_service
 
@@ -985,7 +1020,9 @@ async def get_episode_entities(
         return ErrorResponse(error='episode_uuids must contain at least one UUID')
 
     try:
-        client = await graphiti_service.get_client()
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
         results = await client.get_nodes_and_edges_by_episode(episode_uuids)
 
@@ -1002,13 +1039,14 @@ async def get_episode_entities(
 
 @mcp.tool()
 async def clear_graph(
-    group_ids: str | list[str] | None = None,
+    ctx: Context,
+    scope: Scope = 'private',
 ) -> SuccessResponse | ErrorResponse:
-    """Clear all data from the graph for specified group IDs.
+    """Clear all data from the selected graph.
 
     Args:
-        group_ids: Optional group ID, or list of group IDs, to clear (a single string is
-            accepted). If not provided, clears the default group.
+        scope ('public' | 'private', optional): Which graph to clear. 'private' (default)
+            clears the current user's own graph; 'public' clears the shared "default_db" graph.
     """
     global graphiti_service
 
@@ -1016,27 +1054,14 @@ async def clear_graph(
         return ErrorResponse(error='Graphiti service not initialized')
 
     try:
-        client = await graphiti_service.get_client()
+        group_id = resolve_group_id(scope, ctx)
+        validate_group_id(group_id, ctx)
+        client = await graphiti_service.use_group(group_id)
 
-        # Accept a scalar group_id or a list; fall back to the default when omitted.
-        # (Parenthesized so an explicit group_ids isn't dropped when the configured
-        # default group_id is unset — `or` binds tighter than the ternary.)
-        group_ids = coerce_group_ids(group_ids)
-        effective_group_ids = (
-            group_ids
-            if group_ids is not None
-            else ([config.graphiti.group_id] if config.graphiti.group_id else [])
-        )
+        # Clear data for the resolved graph
+        await clear_data(client.driver, group_ids=[group_id])
 
-        if not effective_group_ids:
-            return ErrorResponse(error='No group IDs specified for clearing')
-
-        # Clear data for the specified group IDs
-        await clear_data(client.driver, group_ids=effective_group_ids)
-
-        return SuccessResponse(
-            message=f'Graph data cleared successfully for group IDs: {", ".join(effective_group_ids)}'
-        )
+        return SuccessResponse(message=f"Graph data cleared successfully for group '{group_id}'")
     except Exception as e:
         error_msg = str(e)
         logger.error(f'Error clearing graph: {error_msg}')

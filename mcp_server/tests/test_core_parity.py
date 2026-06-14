@@ -28,6 +28,7 @@ from config.schema import (  # noqa: E402
 )
 from models.edge_types import EDGE_TYPES  # noqa: E402
 from models.entity_types import ENTITY_TYPES  # noqa: E402
+from services.factories import reasoning_effort_for_model  # noqa: E402
 from services.queue_service import QueueService  # noqa: E402
 from utils.type_config import (  # noqa: E402
     build_edge_type_map,
@@ -70,11 +71,11 @@ class TestBuildEntityTypes:
         assert build_entity_types([]) is None
 
     def test_registered_model_is_preferred(self):
-        cfg = [EntityTypeConfig(name='Preference', description='ignored description')]
+        cfg = [EntityTypeConfig(name='Organization', description='ignored description')]
         result = build_entity_types(cfg)
         assert result is not None
         # The rich registered model, not a doc-only stub, must be used.
-        assert result['Preference'] is ENTITY_TYPES['Preference']
+        assert result['Organization'] is ENTITY_TYPES['Organization']
 
     def test_unknown_name_falls_back_to_doc_only_model(self):
         cfg = [EntityTypeConfig(name='Widget', description='A made-up type')]
@@ -92,10 +93,10 @@ class TestBuildEdgeTypes:
         assert build_edge_types([]) is None
 
     def test_registered_model_is_preferred(self):
-        cfg = [EdgeTypeConfig(name='WorksFor', description='ignored')]
+        cfg = [EdgeTypeConfig(name='Discloses', description='ignored')]
         result = build_edge_types(cfg)
         assert result is not None
-        assert result['WorksFor'] is EDGE_TYPES['WorksFor']
+        assert result['Discloses'] is EDGE_TYPES['Discloses']
 
     def test_unknown_name_falls_back_to_doc_only_model(self):
         cfg = [EdgeTypeConfig(name='CustomEdge', description='custom relation')]
@@ -111,13 +112,13 @@ class TestBuildEdgeTypeMap:
 
     def test_entries_become_tuple_keyed_map(self):
         entries = [
-            EdgeTypeMapEntry(source='Person', target='Organization', edge_types=['WorksFor']),
-            EdgeTypeMapEntry(edge_types=['RelatesTo']),  # defaults to Entity/Entity
+            EdgeTypeMapEntry(source='Organization', target='Metric', edge_types=['Discloses']),
+            EdgeTypeMapEntry(edge_types=['MentionedIn']),  # defaults to Entity/Entity
         ]
         result = build_edge_type_map(entries)
         assert result == {
-            ('Person', 'Organization'): ['WorksFor'],
-            ('Entity', 'Entity'): ['RelatesTo'],
+            ('Organization', 'Metric'): ['Discloses'],
+            ('Entity', 'Entity'): ['MentionedIn'],
         }
 
 
@@ -126,9 +127,9 @@ class TestBuildFactSearchFilters:
         assert build_fact_search_filters() is None
 
     def test_edge_types_only(self):
-        sf = build_fact_search_filters(edge_types=['WorksFor'])
+        sf = build_fact_search_filters(edge_types=['Discloses'])
         assert isinstance(sf, SearchFilters)
-        assert sf.edge_types == ['WorksFor']
+        assert sf.edge_types == ['Discloses']
         assert sf.valid_at is None
         assert sf.invalid_at is None
 
@@ -162,8 +163,8 @@ class TestQueueServiceThreading:
         await service.initialize(client)
 
         ref_time = datetime(2024, 6, 1, tzinfo=timezone.utc)
-        edge_types = {'WorksFor': EDGE_TYPES['WorksFor']}
-        edge_type_map = {('Entity', 'Entity'): ['WorksFor']}
+        edge_types = {'Discloses': EDGE_TYPES['Discloses']}
+        edge_type_map = {('Entity', 'Entity'): ['Discloses']}
 
         await service.add_episode(
             group_id='g1',
@@ -171,12 +172,12 @@ class TestQueueServiceThreading:
             content='body',
             source_description='desc',
             episode_type='text',
-            entity_types={'Preference': ENTITY_TYPES['Preference']},
+            entity_types={'Organization': ENTITY_TYPES['Organization']},
             uuid='ep-uuid',
             reference_time=ref_time,
             edge_types=edge_types,
             edge_type_map=edge_type_map,
-            excluded_entity_types=['Object'],
+            excluded_entity_types=['Policy'],
             previous_episode_uuids=['prev-uuid'],
             custom_extraction_instructions='extra',
             update_communities=True,
@@ -192,7 +193,7 @@ class TestQueueServiceThreading:
         assert kwargs['reference_time'] == ref_time
         assert kwargs['edge_types'] == edge_types
         assert kwargs['edge_type_map'] == edge_type_map
-        assert kwargs['excluded_entity_types'] == ['Object']
+        assert kwargs['excluded_entity_types'] == ['Policy']
         assert kwargs['previous_episode_uuids'] == ['prev-uuid']
         assert kwargs['custom_extraction_instructions'] == 'extra'
         assert kwargs['update_communities'] is True
@@ -294,6 +295,22 @@ class TestEntityTypeRegistration:
             )
 
 
+class TestReasoningEffortForModel:
+    def test_non_reasoning_model_returns_none(self):
+        assert reasoning_effort_for_model('gpt-4.1-mini') is None
+
+    def test_gpt_5_5_runs_reasoning_off(self):
+        assert reasoning_effort_for_model('gpt-5.5') == 'none'
+
+    def test_gpt_5_4_uses_low_not_minimal(self):
+        # 'minimal' 400s on gpt-5.4 — must fall back to 'low'.
+        assert reasoning_effort_for_model('gpt-5.4-nano') == 'low'
+
+    def test_gpt_5_base_and_o_series_use_low(self):
+        for m in ('gpt-5', 'gpt-5-mini', 'gpt-5-nano', 'o1', 'o3-mini'):
+            assert reasoning_effort_for_model(m) == 'low'
+
+
 class TestCoerceGroupIds:
     """Read tools accept a scalar group_id or a list (graphiti-core wants a list)."""
 
@@ -309,3 +326,65 @@ class TestCoerceGroupIds:
     def test_blank_string_is_treated_as_omitted(self):
         # A blank scalar falls back to the default group (not group '').
         assert coerce_group_ids('') is None
+
+
+class _FakeCtx:
+    """Minimal stand-in for the FastMCP Context, exposing request headers."""
+
+    def __init__(self, headers: dict[str, str] | None = None, *, no_request: bool = False):
+        if no_request:
+            self.request_context = type('RC', (), {})()  # has no .request attr
+        else:
+            request = type('Req', (), {'headers': headers or {}})()
+            self.request_context = type('RC', (), {'request': request})()
+
+
+class TestScopeResolution:
+    """scope + request identity resolve to exactly one allowed graph name."""
+
+    def test_public_scope_maps_to_default_db(self):
+        from utils.scope import PUBLIC_GROUP_ID, resolve_group_id
+
+        assert resolve_group_id('public', _FakeCtx()) == PUBLIC_GROUP_ID
+
+    def test_private_scope_uses_header_username(self):
+        from utils.scope import USER_HEADER, resolve_group_id
+
+        ctx = _FakeCtx({USER_HEADER: 'alice'})
+        assert resolve_group_id('private', ctx) == 'alice'
+
+    def test_private_scope_defaults_to_anonymous_without_header(self):
+        from utils.scope import ANONYMOUS_USER, resolve_group_id
+
+        assert resolve_group_id('private', _FakeCtx()) == ANONYMOUS_USER
+
+    def test_private_scope_anonymous_when_no_request(self):
+        from utils.scope import ANONYMOUS_USER, resolve_group_id
+
+        assert resolve_group_id('private', _FakeCtx(no_request=True)) == ANONYMOUS_USER
+
+    def test_malformed_username_falls_back_to_anonymous(self):
+        from utils.scope import ANONYMOUS_USER, USER_HEADER, resolve_group_id
+
+        ctx = _FakeCtx({USER_HEADER: 'bad name/with;chars'})
+        assert resolve_group_id('private', ctx) == ANONYMOUS_USER
+
+    def test_invalid_scope_raises(self):
+        from utils.scope import resolve_group_id
+
+        with pytest.raises(ValueError):
+            resolve_group_id('shared', _FakeCtx())  # type: ignore[arg-type]
+
+    def test_validate_allows_public_and_own_private(self):
+        from utils.scope import PUBLIC_GROUP_ID, USER_HEADER, validate_group_id
+
+        ctx = _FakeCtx({USER_HEADER: 'alice'})
+        validate_group_id(PUBLIC_GROUP_ID, ctx)
+        validate_group_id('alice', ctx)
+
+    def test_validate_rejects_other_group(self):
+        from utils.scope import USER_HEADER, validate_group_id
+
+        ctx = _FakeCtx({USER_HEADER: 'alice'})
+        with pytest.raises(ValueError):
+            validate_group_id('bob', ctx)

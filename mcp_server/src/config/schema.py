@@ -249,7 +249,9 @@ class EdgeTypeMapEntry(BaseModel):
 class GraphitiAppConfig(BaseModel):
     """Graphiti-specific configuration."""
 
-    group_id: str = Field(default='main', description='Group ID')
+    # Name of the shared PUBLIC graph (scope='public'). Private scopes resolve to a
+    # per-user graph (the request's username, or 'anonymous') and are never configured here.
+    group_id: str = Field(default='default_db', description='Public group ID (shared graph)')
     episode_id_prefix: str | None = Field(default='', description='Episode ID prefix')
     user_id: str = Field(default='mcp_user', description='User ID')
     entity_types: list[EntityTypeConfig] = Field(default_factory=list)

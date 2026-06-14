@@ -84,7 +84,7 @@ All environment variables from the standard MCP server are supported:
 
 **Optional:**
 - `BROWSER`: Enable FalkorDB Browser web UI on port 3000 (default: "1", set to "0" to disable)
-- `GRAPHITI_GROUP_ID`: Namespace for graph data (default: "main")
+- `GRAPHITI_GROUP_ID`: Namespace for graph data (default: "default_db"). Set a distinct value only for user-specific memory; general facts stay in the shared "default_db" group.
 - `SEMAPHORE_LIMIT`: Concurrency limit for episode processing (default: 10)
 - `FALKORDB_PASSWORD`: Password for FalkorDB (optional)
 - `FALKORDB_DATABASE`: FalkorDB database name (default: "default_db")
