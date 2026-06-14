@@ -1,0 +1,3782 @@
+{
+    "taxonomy": [
+        {
+            "id": "ENV",
+            "name": "Environmental",
+            "children": [
+                {
+                    "id": "AEmiss",
+                    "name": "Air emissions",
+                    "description": "Refers to non-greenhouse gas air emissions that impact air quality, atmospheric conditions and/or human health. These may be emitted through company operations or through the use of company products, most commonly fossil fuel combustion engines. Air quality references may be related to indoor air quality, e.g. from VOCs, or outdoor air quality.",
+                    "children": [
+                        {
+                            "id": "X156",
+                            "name": "Air emissions (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X157",
+                            "name": "Air quality",
+                            "description": ""
+                        },
+                        {
+                            "id": "X158",
+                            "name": "Ozone depleting substances",
+                            "description": ""
+                        },
+                        {
+                            "id": "X159",
+                            "name": "Particulate matter pollutants",
+                            "description": ""
+                        },
+                        {
+                            "id": "X536",
+                            "name": "Sulfur oxides (SOx) & nitrogen oxides (NOx) emissions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X161",
+                            "name": "Volatile organic chemicals (VOCs)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "AltFuel",
+                    "name": "Alternative fuels",
+                    "description": "Refers to fuels that, when combusted, have a lower climate impact than traditional fossil fuels and are aimed at supporting a low-carbon transition",
+                    "children": [
+                        {
+                            "id": "X162",
+                            "name": "Alternative fuels (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X163",
+                            "name": "Biofuels",
+                            "description": ""
+                        },
+                        {
+                            "id": "X164",
+                            "name": "Hydrogen-based fuels",
+                            "description": ""
+                        },
+                        {
+                            "id": "X165",
+                            "name": "Natural gas fuels",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "NoiseP",
+                    "name": "Ambient pollution",
+                    "description": "Refers to sensory exposure to external factors that are harmful or unpleasant in the immediate surroundings. The effects can range from health problems to ecological imbalances. The topic also mentions initiatives and solutions to reduce the exposure or its consequences.",
+                    "children": [
+                        {
+                            "id": "X796",
+                            "name": "Electromagnetic pollution & health",
+                            "description": ""
+                        },
+                        {
+                            "id": "X485",
+                            "name": "Noise pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X832",
+                            "name": "Odor pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X833",
+                            "name": "Smoke pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X831",
+                            "name": "Visual pollution",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Biod",
+                    "name": "Biodiversity",
+                    "description": "Refers to the impacts on or preservation of the genetic and species varieties of flora and fauna present within a biome(s), including impacts of fishing. It covers references to ecosystem services - the various benefits provided to humans by a healthy ecosystem",
+                    "children": [
+                        {
+                            "id": "X178",
+                            "name": "Biodiversity (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X537",
+                            "name": "Ecosystem diversity & sensitive areas",
+                            "description": ""
+                        },
+                        {
+                            "id": "X177",
+                            "name": "Ecosystem services",
+                            "description": ""
+                        },
+                        {
+                            "id": "X538",
+                            "name": "Fish stocks & responsible fishing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X539",
+                            "name": "Species diversity & protection",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X645",
+                    "name": "Drug resistance & pharmaceuticals in the environment",
+                    "description": "Refers to pharmaceutical chemical compounds increasingly found in the environment, their adverse effects to humans and other living species, and specifically to the threat associated with the antibiotic resistance phenomenon and the management thereof.",
+                    "children": [
+                        {
+                            "id": "X376",
+                            "name": "Antimicrobial stewardship",
+                            "description": ""
+                        },
+                        {
+                            "id": "X312",
+                            "name": "Clinical waste",
+                            "description": ""
+                        },
+                        {
+                            "id": "X683",
+                            "name": "Pharmaceuticals in the environment",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EmMob",
+                    "name": "Employee transportation",
+                    "description": "Refers to schemes that support employee commuting and traveling. This topic also includes initiatives that avoid or reduce unnecessary travel while encouraging more sustainable practices",
+                    "children": [
+                        {
+                            "id": "X551",
+                            "name": "Employee commuting & travel",
+                            "description": ""
+                        },
+                        {
+                            "id": "X274",
+                            "name": "Employee smart mobility",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EnUse",
+                    "name": "Energy use, conservation & reductions",
+                    "description": "Refers to the consumption of fuel and electricity, and overall energy use by companies, as well as energy recycling, energy efficiency gains and overall reduction measures. Energy companies will find references to meeting energy demand while those involved in electricity T&D will find references to distribution systems included in this topic",
+                    "children": [
+                        {
+                            "id": "X281",
+                            "name": "Electricity use",
+                            "description": ""
+                        },
+                        {
+                            "id": "X282",
+                            "name": "Energy demand",
+                            "description": ""
+                        },
+                        {
+                            "id": "X655",
+                            "name": "Energy distribution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X284",
+                            "name": "Energy recycling",
+                            "description": ""
+                        },
+                        {
+                            "id": "X285",
+                            "name": "Energy reduction & efficiencies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X286",
+                            "name": "Energy use (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X287",
+                            "name": "Fuel use",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "FairRem",
+                    "name": "Fair & equitable compensation",
+                    "description": "Refers to the principles, measures and initiatives to offer fair, transparent and consistent employee compensation without favor or prejudice, and ensure it meets minimum liveable standards given the local cost of living.",
+                    "children": [
+                        {
+                            "id": "X266",
+                            "name": "Equal remuneration",
+                            "description": ""
+                        },
+                        {
+                            "id": "X267",
+                            "name": "Fair employee compensation",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "GHG",
+                    "name": "GHG emissions & reductions",
+                    "description": "Refers to the direct and indirect emissions of greenhouse gases (GHGs) and emission reduction targets aimed at limiting individual company contributions to global warming.",
+                    "children": [
+                        {
+                            "id": "X305",
+                            "name": "GHG emission reduction goals & ambitions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X306",
+                            "name": "GHG emissions measurement & reporting",
+                            "description": ""
+                        },
+                        {
+                            "id": "X307",
+                            "name": "Scope 3 GHG emissions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X308",
+                            "name": "Scopes 1 & 2 GHG emissions",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "HazardWst",
+                    "name": "Hazardous waste management",
+                    "description": "Refers to operational waste that poses a threat to human health or the environment, and the waste management practices to dispose of it responsibly.",
+                    "children": [
+                        {
+                            "id": "X311",
+                            "name": "Chemical waste",
+                            "description": ""
+                        },
+                        {
+                            "id": "X313",
+                            "name": "Electrical & electronic waste",
+                            "description": ""
+                        },
+                        {
+                            "id": "X314",
+                            "name": "Hazardous waste (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X315",
+                            "name": "Radioactive waste",
+                            "description": ""
+                        },
+                        {
+                            "id": "X748",
+                            "name": "Tailings management",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X108",
+                    "name": "Managing land use & reducing deforestation",
+                    "description": "Refers to the use and management of the Earth's land surface, soil and forest resources to meet business and customer needs, as well as measures of any relevant contamination, deterioration or destruction. It covers environmentally responsible practices designed to maintain and improve the Earth's long-term biodiversity, regeneration capacity and productivity.",
+                    "children": [
+                        {
+                            "id": "X351",
+                            "name": "Deforestation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X354",
+                            "name": "Land & forests (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X352",
+                            "name": "Land contamination & remediation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X353",
+                            "name": "Land use & management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X356",
+                            "name": "Sustainable forestry",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "NonHzdWst",
+                    "name": "Non-hazardous waste management",
+                    "description": "Refers to the management, disposal and volume of innocuous operational waste that has not been recovered for recycling or reuse.",
+                    "children": [
+                        {
+                            "id": "X385",
+                            "name": "Commercial & industrial waste",
+                            "description": ""
+                        },
+                        {
+                            "id": "X433",
+                            "name": "Dumps & landfills",
+                            "description": ""
+                        },
+                        {
+                            "id": "X705",
+                            "name": "Food loss & waste",
+                            "description": ""
+                        },
+                        {
+                            "id": "X387",
+                            "name": "Non-hazardous waste management (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X436",
+                            "name": "Thermal treatment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X434",
+                            "name": "Waste management (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X835",
+                    "name": "Outer space management",
+                    "description": "Refers to the processes and systems to control and regulate human activities in outer space. It includes the management of space traffic and low earth orbit, the mitigation of space debris, the prevention of collisions, and the minimization of the impacts of space weather.",
+                    "children": [
+                        {
+                            "id": "X837",
+                            "name": "Low earth orbit economy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X838",
+                            "name": "Space traffic & orbital debris management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X836",
+                            "name": "Space weather & safety",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X117",
+                    "name": "Physical disasters & failures",
+                    "description": "Refers to catastrophic events resulting from natural processes or human error and negligence, including significant failure of critical public or private utility systems and assets.",
+                    "children": [
+                        {
+                            "id": "X400",
+                            "name": "Avoidable disasters",
+                            "description": ""
+                        },
+                        {
+                            "id": "X401",
+                            "name": "Infrastructure resilience & failures",
+                            "description": ""
+                        },
+                        {
+                            "id": "X402",
+                            "name": "Natural disasters",
+                            "description": ""
+                        },
+                        {
+                            "id": "X403",
+                            "name": "Wildfires",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X738",
+                    "name": "Plastics management",
+                    "description": "Refers to the negative aspects of plastic pollution with the potential to harm wildlife and humans, as well as measures to mitigate those - including the collection, segregation, and recycling of all kinds of plastics to move towards a circular economy - and initiatives to reduce or eliminate plastic use.",
+                    "children": [
+                        {
+                            "id": "X636",
+                            "name": "Plastic elimination & reduction",
+                            "description": ""
+                        },
+                        {
+                            "id": "X739",
+                            "name": "Plastic pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X740",
+                            "name": "Plastics recovery & recycling",
+                            "description": ""
+                        },
+                        {
+                            "id": "X741",
+                            "name": "Plastics with biomaterials",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X749",
+                    "name": "Project closure, decommissioning & environmental restoration",
+                    "description": "Refers to the activities of the final stage in the life-cycle of facilities that are no longer suitable for operations, including plant decommissioning, deconstruction, land reclamation, and management of other environmental liabilities.",
+                    "children": [
+                        {
+                            "id": "X754",
+                            "name": "Contaminated soil restoration",
+                            "description": ""
+                        },
+                        {
+                            "id": "X752",
+                            "name": "Environmental liability",
+                            "description": ""
+                        },
+                        {
+                            "id": "X751",
+                            "name": "Facility closure & decommissioning",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X110",
+                    "name": "Protection of natural land cover",
+                    "description": "Refers to the sustainable management, conservation and restoration of the Earth's land surface, soil, forest and wetland resources, including sustainable agriculture practices.",
+                    "children": [
+                        {
+                            "id": "X757",
+                            "name": "Eco-friendly Crop Protection",
+                            "description": ""
+                        },
+                        {
+                            "id": "X419",
+                            "name": "Forest protection & regrowth",
+                            "description": ""
+                        },
+                        {
+                            "id": "X420",
+                            "name": "Land protection",
+                            "description": ""
+                        },
+                        {
+                            "id": "X355",
+                            "name": "Sustainable agriculture",
+                            "description": ""
+                        },
+                        {
+                            "id": "X421",
+                            "name": "Wetlands protection",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "RecycReduct",
+                    "name": "Recycling, waste recovery & reduction",
+                    "description": "Refers to measures to reduce the amount of waste produced and sent for final disposal, efforts to recover waste for useful material harvesting and reuse, and recycling.",
+                    "children": [
+                        {
+                            "id": "X570",
+                            "name": "Organic waste treatment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X571",
+                            "name": "Recycling",
+                            "description": ""
+                        },
+                        {
+                            "id": "X581",
+                            "name": "Waste recovery & reuse",
+                            "description": ""
+                        },
+                        {
+                            "id": "X438",
+                            "name": "Waste reduction",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EEffTrspt",
+                    "name": "Smarter & greener transportation",
+                    "description": "Refers to more efficient, eco-friendly modes of transportation and logistics management, as well as smarter transportation systems and infrastructure planning.",
+                    "children": [
+                        {
+                            "id": "X572",
+                            "name": "Eco-friendly logistics",
+                            "description": ""
+                        },
+                        {
+                            "id": "X573",
+                            "name": "Eco-friendly transportation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X574",
+                            "name": "Smart & green transportation planning",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Spill",
+                    "name": "Spills",
+                    "description": "Refers to leaks, spills and discharges of substances that have negative environmental or human health impacts. It includes corporate preparedness, response plans, clean-up and remediation activities.",
+                    "children": [
+                        {
+                            "id": "X468",
+                            "name": "Chemical spills",
+                            "description": ""
+                        },
+                        {
+                            "id": "X470",
+                            "name": "Oil spills",
+                            "description": ""
+                        },
+                        {
+                            "id": "X577",
+                            "name": "Reportable or significant spills",
+                            "description": ""
+                        },
+                        {
+                            "id": "X471",
+                            "name": "Spill prevention & remediation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X472",
+                            "name": "Spills (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "BuildAct",
+                    "name": "Sustainable building management",
+                    "description": "Refers to reducing the environmental footprint of buildings and facilities across their life-cycles, from design to construction, operation, maintenance, renovation, and demolition. References to interior planning and design considerations, like more natural light and plants, to improve the indoor environmental quality are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X631",
+                            "name": "Green building standards & certification systems",
+                            "description": ""
+                        },
+                        {
+                            "id": "X632",
+                            "name": "Indoor environmental quality",
+                            "description": ""
+                        },
+                        {
+                            "id": "X483",
+                            "name": "Sustainable building management (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X113",
+                    "name": "Transition to a circular economy",
+                    "description": "Refers to principles, practices and processes that minimize or eliminate the negative environmental impacts of a product across its lifecycle in an effort to eliminate waste and reduce virgin input materials. Aspects of producer responsibility for their products are included in this topic, as are industry-specific models to reduce the environmental footprint of products and services.",
+                    "children": [
+                        {
+                            "id": "X499",
+                            "name": "Circular design & models",
+                            "description": ""
+                        },
+                        {
+                            "id": "X500",
+                            "name": "Circular economy (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X501",
+                            "name": "Green chemistry",
+                            "description": ""
+                        },
+                        {
+                            "id": "X502",
+                            "name": "Green IT",
+                            "description": ""
+                        },
+                        {
+                            "id": "X503",
+                            "name": "Product eco-efficiency",
+                            "description": ""
+                        },
+                        {
+                            "id": "X504",
+                            "name": "Product life-cycle",
+                            "description": ""
+                        },
+                        {
+                            "id": "X505",
+                            "name": "Product stewardship",
+                            "description": ""
+                        },
+                        {
+                            "id": "X506",
+                            "name": "Product take-back",
+                            "description": ""
+                        },
+                        {
+                            "id": "X507",
+                            "name": "Sustainable packaging",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Renew",
+                    "name": "Transition to renewable energy",
+                    "description": "Refers to the transition from a predominantly fossil-based energy production and consumption system to zero-carbon and renewable energy sources, including policies, goals, accounting instruments, services and technologies that facilitate that transition.",
+                    "children": [
+                        {
+                            "id": "X508",
+                            "name": "Biomass energy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X810",
+                            "name": "Electrification",
+                            "description": ""
+                        },
+                        {
+                            "id": "X509",
+                            "name": "Energy storage",
+                            "description": ""
+                        },
+                        {
+                            "id": "X511",
+                            "name": "Geothermal energy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X512",
+                            "name": "Hydropower",
+                            "description": ""
+                        },
+                        {
+                            "id": "X513",
+                            "name": "Marine energy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X515",
+                            "name": "Nuclear energy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X514",
+                            "name": "Renewable energy (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X516",
+                            "name": "Renewable energy goals & ambitions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X517",
+                            "name": "Solar power",
+                            "description": ""
+                        },
+                        {
+                            "id": "X510",
+                            "name": "Transition-enabling energy services",
+                            "description": ""
+                        },
+                        {
+                            "id": "X518",
+                            "name": "Wind power",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Water",
+                    "name": "Water",
+                    "description": "Refers to the use, management and conservation of water resources for meeting business and customer needs. It includes the availability of freshwater, the efforts to reduce water consumption, and the treatment and re-use of wastewater and greywater.",
+                    "children": [
+                        {
+                            "id": "X521",
+                            "name": "Water (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X522",
+                            "name": "Water risk & management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X523",
+                            "name": "Water treatment & recycling",
+                            "description": ""
+                        },
+                        {
+                            "id": "X524",
+                            "name": "Water use",
+                            "description": ""
+                        },
+                        {
+                            "id": "X525",
+                            "name": "Water use reduction & efficiencies",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "WatPoll",
+                    "name": "Water pollution",
+                    "description": "Refers to the human-induced contamination of bodies of water, affecting the water quality, directly or indirectly harming other living species, or posing a hazard to human health.",
+                    "children": [
+                        {
+                            "id": "X526",
+                            "name": "Extractives pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X527",
+                            "name": "Freshwater pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X528",
+                            "name": "Marine pollution",
+                            "description": ""
+                        },
+                        {
+                            "id": "X529",
+                            "name": "Water effluent",
+                            "description": ""
+                        },
+                        {
+                            "id": "X530",
+                            "name": "Water quality",
+                            "description": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "SOC",
+            "name": "Social",
+            "children": [
+                {
+                    "id": "MedAcc",
+                    "name": "Access to health care & medicine",
+                    "description": "Refers to initiatives aimed at providing equal access to comprehensive, quality and timely health care services for all people. It covers activities aimed at expanding access to medicine and treatments for more people, as well as research projects on unmet medical needs",
+                    "children": [
+                        {
+                            "id": "X422",
+                            "name": "Access to healthcare & medicine (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X785",
+                            "name": "Digital medicine & telemedicine",
+                            "description": ""
+                        },
+                        {
+                            "id": "X812",
+                            "name": "Drug distribution",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Zoo",
+                    "name": "Animal welfare",
+                    "description": "Refers to consideration of the physical and mental welfare of animals that are central to some business models, including practices aimed at maintaining an environment in which captive animals can live and develop as they would have in their natural habitats",
+                    "children": [
+                        {
+                            "id": "X166",
+                            "name": "Animal consumption",
+                            "description": ""
+                        },
+                        {
+                            "id": "X167",
+                            "name": "Animal entertainment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X168",
+                            "name": "Animal testing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X169",
+                            "name": "Animal welfare (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X829",
+                            "name": "Pet health, nutrition & wellbeing",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X814",
+                    "name": "Biotechnology & ethical considerations",
+                    "description": "Refers to innovations and breakthroughs that use biology to improve human, animal, and plant life by manipulating their genetic structures and biomolecular processes. It includes mentions of medicines and therapeutics that prevent and treat disease, medical diagnostics, genetically modified organisms (GMOs), and cultured food. It also incorporates ethical concerns related to these technologies.",
+                    "children": [
+                        {
+                            "id": "X817",
+                            "name": "Biotechnology & ethical considerations (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X815",
+                            "name": "Ethical considerations",
+                            "description": ""
+                        },
+                        {
+                            "id": "X756",
+                            "name": "Genetic resources for food & agriculture",
+                            "description": ""
+                        },
+                        {
+                            "id": "X819",
+                            "name": "Lab-grown food",
+                            "description": ""
+                        },
+                        {
+                            "id": "X816",
+                            "name": "Regenerative medicine",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X103",
+                    "name": "Changing consumption patterns",
+                    "description": "Refers to both sides of the producer-consumer paradigm: producers educating consumers on social and environmental issues and consumer activism to shift production patterns and products towards increased sustainability. General trends oriented around sustainable production & consumption are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X541",
+                            "name": "Buying organic",
+                            "description": ""
+                        },
+                        {
+                            "id": "X201",
+                            "name": "Consumer activism",
+                            "description": ""
+                        },
+                        {
+                            "id": "X202",
+                            "name": "Consumer education & awareness-raising",
+                            "description": ""
+                        },
+                        {
+                            "id": "X826",
+                            "name": "Experiential purchases & luxury consumer demands",
+                            "description": ""
+                        },
+                        {
+                            "id": "X708",
+                            "name": "Products that support healthy lifestyles",
+                            "description": ""
+                        },
+                        {
+                            "id": "X205",
+                            "name": "Sustainable consumption & production",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ChRgts",
+                    "name": "Children's rights",
+                    "description": "Refers to the protection of the rights of the child as relates to anticipating, preventing or responding to any form of violence, exploitation, abuse or practices that might be harmful to a child's physical and mental development and integrity.",
+                    "children": [
+                        {
+                            "id": "X206",
+                            "name": "Child labor",
+                            "description": ""
+                        },
+                        {
+                            "id": "X207",
+                            "name": "Child protection",
+                            "description": ""
+                        },
+                        {
+                            "id": "X209",
+                            "name": "Child sexual exploitation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X208",
+                            "name": "Children's rights (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "CoEgt",
+                    "name": "Community engagement",
+                    "description": "Refers to the relationship that exists between a company and the communities it operates in and engagement with those communities for consultation or feedback",
+                    "children": [
+                        {
+                            "id": "X216",
+                            "name": "Community engagement (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X542",
+                            "name": "Community feedback mechanisms",
+                            "description": ""
+                        },
+                        {
+                            "id": "X217",
+                            "name": "Community rapport",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "CoSupp",
+                    "name": "Community support & development",
+                    "description": "Refers to the business practices and projects carried out to ensure the well-being and positive development of communities with which a company interacts. It covers company-led initiatives aimed at growing a community's ability to develop and implement solutions for improved management of their physical, social, economic and cultural environments",
+                    "children": [
+                        {
+                            "id": "X218",
+                            "name": "Community capacity building",
+                            "description": ""
+                        },
+                        {
+                            "id": "X219",
+                            "name": "Community education & training",
+                            "description": ""
+                        },
+                        {
+                            "id": "X220",
+                            "name": "Community integration & contribution",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X733",
+                    "name": "Consumer nutrition & wellbeing",
+                    "description": "Refers to different aspects that relate to consumer nutrition: (1) Food products that provide varied, balanced, or special diets, and the information regarding their nutritional components; (2) Measures to ensure food safety and quality standards; (3) Nutrition for children and adolescents; and (4) References to the effects of food on human health, including medical conditions or chronic diseases.",
+                    "children": [
+                        {
+                            "id": "X734",
+                            "name": "Children & adolescents nutrition",
+                            "description": ""
+                        },
+                        {
+                            "id": "X412",
+                            "name": "Dietary & nutritional considerations",
+                            "description": ""
+                        },
+                        {
+                            "id": "X735",
+                            "name": "Food safety & quality",
+                            "description": ""
+                        },
+                        {
+                            "id": "X737",
+                            "name": "Nutrition-related noncommunicable diseases",
+                            "description": ""
+                        },
+                        {
+                            "id": "X736",
+                            "name": "Nutritious food",
+                            "description": ""
+                        },
+                        {
+                            "id": "X203",
+                            "name": "Special diets",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "CstRgts",
+                    "name": "Consumer rights",
+                    "description": "Refers to consumers' rights to be safe, informed, have choice, and provide feedback to the producers of the goods and services they purchase. It includes mechanisms to ensure consumers are treated fairly and honestly during commercial transactions",
+                    "children": [
+                        {
+                            "id": "X230",
+                            "name": "Consumer rights (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X228",
+                            "name": "Fair & equitable treatment of customers",
+                            "description": ""
+                        },
+                        {
+                            "id": "X229",
+                            "name": "Financial consumer protection",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "CstSat",
+                    "name": "Customer satisfaction",
+                    "description": "Refers to the strategies and processes intended to meet or surpass customer expectations and the requirements to create a positive experience and build customer loyalty from the point of purchase onwards",
+                    "children": [
+                        {
+                            "id": "X244",
+                            "name": "Consumer complaints & disputes",
+                            "description": ""
+                        },
+                        {
+                            "id": "X245",
+                            "name": "Customer acquisition",
+                            "description": ""
+                        },
+                        {
+                            "id": "X246",
+                            "name": "Customer centricity",
+                            "description": ""
+                        },
+                        {
+                            "id": "X247",
+                            "name": "Customer retention",
+                            "description": ""
+                        },
+                        {
+                            "id": "X248",
+                            "name": "Customer satisfaction measurement & metrics",
+                            "description": ""
+                        },
+                        {
+                            "id": "X249",
+                            "name": "Customer service",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EmDev",
+                    "name": "Employee development",
+                    "description": "Refers to the practices, initiatives and processes aimed at nurturing talent and supporting employees in developing the skills necessary to succeed in their next role. Aspects of career progression, including vertical and lateral job moves based on performance assessments, as well as succession planning, are included in this topic",
+                    "children": [
+                        {
+                            "id": "X486",
+                            "name": "Company-sponsored scholarships",
+                            "description": ""
+                        },
+                        {
+                            "id": "X491",
+                            "name": "Employee development (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X487",
+                            "name": "Employee training & mentoring programs",
+                            "description": ""
+                        },
+                        {
+                            "id": "X488",
+                            "name": "Internal mobility & job promotion",
+                            "description": ""
+                        },
+                        {
+                            "id": "X580",
+                            "name": "Performance reviews",
+                            "description": ""
+                        },
+                        {
+                            "id": "X490",
+                            "name": "Succession planning",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EmEgt",
+                    "name": "Employee engagement & satisfaction",
+                    "description": "Refers to engagement activities centered on enhancing collaboration and communication between employees and improving their work contributions. It also includes mechanisms to grow employee contentment, accomplishment, satisfaction, and motivation regarding their jobs, and associated satisfaction measurements and metrics",
+                    "children": [
+                        {
+                            "id": "X271",
+                            "name": "Employee engagement (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X272",
+                            "name": "Job satisfaction",
+                            "description": ""
+                        },
+                        {
+                            "id": "X273",
+                            "name": "Team communication & collaboration",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EmBnft",
+                    "name": "Employee incentives & benefits",
+                    "description": "Refers to financial and non-financial benefits provided to employees, and corporate strategies to leverage those benefits to incentivize performance and employee retention. Due to differing legal obligations by jurisdiction, any benefit provided by the employer above-and-beyond basic pay-for-work compensation, and that is not otherwise enshrined in international labor law, is included in this topic",
+                    "children": [
+                        {
+                            "id": "X263",
+                            "name": "Employee benefits (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X264",
+                            "name": "Employee incentive strategies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X265",
+                            "name": "Employee recognition",
+                            "description": ""
+                        },
+                        {
+                            "id": "X548",
+                            "name": "Healthcare benefits",
+                            "description": ""
+                        },
+                        {
+                            "id": "X549",
+                            "name": "Parental leave & support",
+                            "description": ""
+                        },
+                        {
+                            "id": "X269",
+                            "name": "Retirement benefits",
+                            "description": ""
+                        },
+                        {
+                            "id": "X550",
+                            "name": "Savings plans & stock option benefits",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "WellB",
+                    "name": "Employee wellbeing",
+                    "description": "Refers to the mental and physical condition of employees with respect to their health, happiness, comfort and morale. It includes initiatives that promote healthy lifestyles, offer physical and social activities within a company, and support mental health, as well as work arrangements that allow employees a level of autonomy to follow a work schedule aligned with a work-life balance that best suits them",
+                    "children": [
+                        {
+                            "id": "X276",
+                            "name": "Employee wellbeing (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X277",
+                            "name": "Mental workplace support",
+                            "description": ""
+                        },
+                        {
+                            "id": "X279",
+                            "name": "Promotion of healthy lifestyles",
+                            "description": ""
+                        },
+                        {
+                            "id": "X553",
+                            "name": "Work-life balance",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X111",
+                    "name": "Epidemics & their multi-dimensional impacts",
+                    "description": "Refers to the multidimensional consequences and the collateral impacts that an epidemic brings to society and businesses, including adaptation and mitigation measures.",
+                    "children": [
+                        {
+                            "id": "X424",
+                            "name": "Epidemics & pandemics",
+                            "description": ""
+                        },
+                        {
+                            "id": "X425",
+                            "name": "High-threat pathogens",
+                            "description": ""
+                        },
+                        {
+                            "id": "X427",
+                            "name": "Vaccination",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Div",
+                    "name": "Fair & inclusive workplace",
+                    "description": "Refers to the processes, practices and mechanisms in place to support the active integration and fair treatment of all employees, with a focus on gender, age, cultural background, skills, race, religion, and sexual orientation. It considers equal opportunity provisions aimed at promoting the professional development of all employees and supporting a culture of acceptance.",
+                    "children": [
+                        {
+                            "id": "X293",
+                            "name": "Elderly employees",
+                            "description": ""
+                        },
+                        {
+                            "id": "X294",
+                            "name": "Equal opportunities & treatment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X295",
+                            "name": "Female leadership",
+                            "description": ""
+                        },
+                        {
+                            "id": "X296",
+                            "name": "Non-discrimination",
+                            "description": ""
+                        },
+                        {
+                            "id": "X297",
+                            "name": "Reintegration of veterans",
+                            "description": ""
+                        },
+                        {
+                            "id": "X298",
+                            "name": "Special needs employees",
+                            "description": ""
+                        },
+                        {
+                            "id": "X299",
+                            "name": "Workforce diversity & inclusion",
+                            "description": ""
+                        },
+                        {
+                            "id": "X300",
+                            "name": "Youth employment",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "FinIncl",
+                    "name": "Financial access, literacy & advice",
+                    "description": "Refers to practices, processes, and initiatives to ensure that individuals, communities, and businesses have appropriate access to and information on financial services, products, and resources. Financial empowerment of employees and customers through sound advice is also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X301",
+                            "name": "Access to finance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X670",
+                            "name": "Empowering through financial advice",
+                            "description": ""
+                        },
+                        {
+                            "id": "X753",
+                            "name": "External & innovative sources of finance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X302",
+                            "name": "Financial literacy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X303",
+                            "name": "Financial planning & asset formation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X304",
+                            "name": "Youth financial education",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X747",
+                    "name": "Future of work",
+                    "description": "Refers to the impacts that digitization, globalization, demographic changes, and Covid-19 have on the jobs and how jobs are and will be performed. It includes the critical skills and requirements that the current and future workforce must meet to adapt and thrive, as well as the strategic management of flexible work arrangements.",
+                    "children": [
+                        {
+                            "id": "X694",
+                            "name": "Building skills for a digital world",
+                            "description": ""
+                        },
+                        {
+                            "id": "X554",
+                            "name": "Flexible work arrangements",
+                            "description": ""
+                        },
+                        {
+                            "id": "X552",
+                            "name": "Remote work",
+                            "description": ""
+                        },
+                        {
+                            "id": "X534",
+                            "name": "Transformation of jobs due to automation",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Griev",
+                    "name": "Grievance mechanisms & remediation",
+                    "description": "Refers to systems and channels aimed at collecting, processing and addressing formal complaints from employees or other parties engaged in business, legal, or societal relationships, including whistleblowing procedures.",
+                    "children": [
+                        {
+                            "id": "X309",
+                            "name": "Complaint management system",
+                            "description": ""
+                        },
+                        {
+                            "id": "X310",
+                            "name": "Whistleblowing procedures",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X109",
+                    "name": "Holistic & patient-centric approach to health",
+                    "description": "Refers to practices and services aimed at improving the safety and wellbeing of people, promoting healthy lifestyles, preventing diseases, and educating patients, caregivers and the general public on health issues. It covers personalized support provided to patients, as well as the proper use of medication and available treatments.",
+                    "children": [
+                        {
+                            "id": "X709",
+                            "name": "Cancer cure & prevention",
+                            "description": ""
+                        },
+                        {
+                            "id": "X423",
+                            "name": "Disease awareness & education",
+                            "description": ""
+                        },
+                        {
+                            "id": "X378",
+                            "name": "Medication use management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X414",
+                            "name": "Patient safety & wellbeing",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "HuRgts",
+                    "name": "Human rights",
+                    "description": "Refers to the fundamental rights and freedoms inherent to all human beings that ensure they are able to live with dignity, freedom, equality, justice, and peace, and the measures necessary to uphold these rights.",
+                    "children": [
+                        {
+                            "id": "X316",
+                            "name": "Access to basic resources",
+                            "description": ""
+                        },
+                        {
+                            "id": "X794",
+                            "name": "Civil & political rights",
+                            "description": ""
+                        },
+                        {
+                            "id": "X743",
+                            "name": "Food security",
+                            "description": ""
+                        },
+                        {
+                            "id": "X318",
+                            "name": "Human rights (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X793",
+                            "name": "Modern slavery",
+                            "description": ""
+                        },
+                        {
+                            "id": "X744",
+                            "name": "Security practices",
+                            "description": ""
+                        },
+                        {
+                            "id": "X795",
+                            "name": "Sexual & reproductive health & rights",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X660",
+                    "name": "Inclusive products & services",
+                    "description": "Refers to products and services that integrate characteristics to make them accessible and usable by as many people as reasonably possible, with particular focus on low-income individuals or groups, entrepreneurs or small businesses, and people with disabilities.",
+                    "children": [
+                        {
+                            "id": "X461",
+                            "name": "Digital inclusion & literacy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X663",
+                            "name": "Energy inclusion",
+                            "description": ""
+                        },
+                        {
+                            "id": "X742",
+                            "name": "Housing accessibility & availability",
+                            "description": ""
+                        },
+                        {
+                            "id": "X662",
+                            "name": "Inclusive finance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X576",
+                            "name": "Inclusive products & services",
+                            "description": ""
+                        },
+                        {
+                            "id": "X700",
+                            "name": "Water affordability & accessibility",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "IndiePop",
+                    "name": "Indigenous populations",
+                    "description": "Refers to communities that live within geographically distinct traditional habitats or ancestral territories, and who identify themselves as being part of a distinct cultural group. It includes engagement with indigenous people in reference to the land, workplace and societal contexts.",
+                    "children": [
+                        {
+                            "id": "X321",
+                            "name": "Indigenous populations engagement",
+                            "description": ""
+                        },
+                        {
+                            "id": "X323",
+                            "name": "Indigenous populations workplace inclusion",
+                            "description": ""
+                        },
+                        {
+                            "id": "X555",
+                            "name": "Indigenous populations' property rights & displacement",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "LabRgts",
+                    "name": "Labor rights",
+                    "description": "Refers to the legal rights and fundamental principles that regulate labor relations between workers and employers, including stipulations of employment and working conditions.",
+                    "children": [
+                        {
+                            "id": "X559",
+                            "name": "Conditions of employment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X339",
+                            "name": "Fair organization of working time",
+                            "description": ""
+                        },
+                        {
+                            "id": "X341",
+                            "name": "Labor rights (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X560",
+                            "name": "Labor strikes",
+                            "description": ""
+                        },
+                        {
+                            "id": "X343",
+                            "name": "Unfair or wrongful dismissal",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "LocEc",
+                    "name": "Local economy support",
+                    "description": "Refers to the production, distribution, and procurement activities that use local resources to stimulate economic growth and development while generating social, commercial, and working opportunities for residents.",
+                    "children": [
+                        {
+                            "id": "X834",
+                            "name": "Artisanal production",
+                            "description": ""
+                        },
+                        {
+                            "id": "X344",
+                            "name": "Job creation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X561",
+                            "name": "Local economic development (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X346",
+                            "name": "Local production & procurement",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "MarkAccs",
+                    "name": "Market access",
+                    "description": "Refers to the mechanisms that guarantee an open and free-market economy as well as to government policies that restrict international trade for the benefit of a domestic economy, including tariffs, subsidies, import quotas, product standards, currency manipulation and commercial or financial penalties.",
+                    "children": [
+                        {
+                            "id": "X357",
+                            "name": "Economic sanctions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X358",
+                            "name": "Free trade",
+                            "description": ""
+                        },
+                        {
+                            "id": "X359",
+                            "name": "Protectionism",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "RespMark",
+                    "name": "Marketing & selling practices",
+                    "description": "Refers to both responsible and unethical advertisements, communications and sales strategies, with a focus on the honest representation of the characteristics, impacts, and safety of products and services.",
+                    "children": [
+                        {
+                            "id": "X364",
+                            "name": "Advertising to children & adolescents",
+                            "description": ""
+                        },
+                        {
+                            "id": "X365",
+                            "name": "Green marketing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X367",
+                            "name": "Responsible marketing & sales",
+                            "description": ""
+                        },
+                        {
+                            "id": "X369",
+                            "name": "Social marketing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X370",
+                            "name": "Unethical marketing & sales practices",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "OHS",
+                    "name": "Occupational health & safety",
+                    "description": "Refers to health and safety in the workplace with a focus on primary risk prevention. On the one hand, it integrates protocols, training and the design of optimal conditions for employee productivity, while on the other hand it refers to work-related injuries, illnesses and death, as well as behaviors and workplace risks that can cause physical, psychological, sexual or economic damage to employees.",
+                    "children": [
+                        {
+                            "id": "X390",
+                            "name": "Occupational health & safety (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X388",
+                            "name": "OHS certification & audits",
+                            "description": ""
+                        },
+                        {
+                            "id": "X389",
+                            "name": "OHS education & training",
+                            "description": ""
+                        },
+                        {
+                            "id": "X391",
+                            "name": "OHS management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X393",
+                            "name": "Workplace hazards & risks",
+                            "description": ""
+                        },
+                        {
+                            "id": "X394",
+                            "name": "Workplace incidents & illnesses",
+                            "description": ""
+                        },
+                        {
+                            "id": "X395",
+                            "name": "Workplace protection & incident prevention",
+                            "description": ""
+                        },
+                        {
+                            "id": "X396",
+                            "name": "Workplace violence & harassment",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Phila",
+                    "name": "Philanthropy & volunteering",
+                    "description": "Refers to the contribution to other organizations and communities through funds, volunteering efforts, and in-kind products or services. It also includes assistance given to people in immediate distress during and after emergencies and disasters.",
+                    "children": [
+                        {
+                            "id": "X397",
+                            "name": "Corporate giving",
+                            "description": ""
+                        },
+                        {
+                            "id": "X398",
+                            "name": "Emergency aid",
+                            "description": ""
+                        },
+                        {
+                            "id": "X399",
+                            "name": "Employer-supported volunteering",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ProdSfy",
+                    "name": "Product & service safety & quality",
+                    "description": "Refers to the initiatives, procedures and staff training to ensure product and service quality and the safety of end consumers, including considerations regarding product ingredients and their potential effects on customer health. References to breaches of product or service quality and safety and general liability concerns are included in this topic.",
+                    "children": [
+                        {
+                            "id": "X568",
+                            "name": "Customer health & safety",
+                            "description": ""
+                        },
+                        {
+                            "id": "X416",
+                            "name": "Product & service liability",
+                            "description": ""
+                        },
+                        {
+                            "id": "X711",
+                            "name": "Product safe & responsible use",
+                            "description": ""
+                        },
+                        {
+                            "id": "X417",
+                            "name": "Quality control systems",
+                            "description": ""
+                        },
+                        {
+                            "id": "X418",
+                            "name": "Traffic & transportation safety",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X818",
+                    "name": "Public health",
+                    "description": "Refers to the major contributors to disease in humans, as well as factors that diminish a person's ability to live a fulfilling life.",
+                    "children": [
+                        {
+                            "id": "X797",
+                            "name": "Mental & emotional health",
+                            "description": ""
+                        },
+                        {
+                            "id": "X426",
+                            "name": "Noncommunicable diseases",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X118",
+                    "name": "Shifting demographics",
+                    "description": "Refers to the impact that any localized or global demographic trends may have on the economic, political and social spheres. It includes services and products designed to address the problems or needs that arise from these changes, which are based on differing factors such as birth or death rates, age structure, migration, education and income.",
+                    "children": [
+                        {
+                            "id": "X455",
+                            "name": "Aging population",
+                            "description": ""
+                        },
+                        {
+                            "id": "X456",
+                            "name": "Migration",
+                            "description": ""
+                        },
+                        {
+                            "id": "X457",
+                            "name": "Millennials & new generations",
+                            "description": ""
+                        },
+                        {
+                            "id": "X458",
+                            "name": "Population growth",
+                            "description": ""
+                        },
+                        {
+                            "id": "X459",
+                            "name": "Social mobility",
+                            "description": ""
+                        },
+                        {
+                            "id": "X460",
+                            "name": "Urbanization",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "SocIncl",
+                    "name": "Social inclusion",
+                    "description": "Refers to programs and initiatives addressing key social issues of marginalization, exclusion, inequality and poverty, and general themes focused on ensuring all people are able to participate in modern society.",
+                    "children": [
+                        {
+                            "id": "X792",
+                            "name": "Disadvantaged & under-represented groups",
+                            "description": ""
+                        },
+                        {
+                            "id": "X745",
+                            "name": "Equity & justice for all",
+                            "description": ""
+                        },
+                        {
+                            "id": "X466",
+                            "name": "Poverty reduction",
+                            "description": ""
+                        },
+                        {
+                            "id": "X791",
+                            "name": "Racial, ethnic & gender justice",
+                            "description": ""
+                        },
+                        {
+                            "id": "X668",
+                            "name": "Rising inequality",
+                            "description": ""
+                        },
+                        {
+                            "id": "X690",
+                            "name": "Women's empowerment",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X813",
+                    "name": "Socio-economic risks",
+                    "description": "Refers to societal and macroeconomic issues that may pose risks to business if not handled appropriately by national or subnational governments or agencies.",
+                    "children": [
+                        {
+                            "id": "X404",
+                            "name": "Adverse economic conditions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X788",
+                            "name": "Energy security",
+                            "description": ""
+                        },
+                        {
+                            "id": "X710",
+                            "name": "Systemic risks in supply chains",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Union",
+                    "name": "Unionization",
+                    "description": "Refers to the relationship between labor unions and employers and related matters, including collective bargaining.",
+                    "children": [
+                        {
+                            "id": "X519",
+                            "name": "Collective bargaining",
+                            "description": ""
+                        },
+                        {
+                            "id": "X520",
+                            "name": "Unionization (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "WFChges",
+                    "name": "Workforce & organizational change management",
+                    "description": "Refers to strategic decisions and general trends involving workforce changes, as well as the structures, procedures and technologies in place to manage that change and successfully implement new processes and commercial strategies while minimizing negative impacts.",
+                    "children": [
+                        {
+                            "id": "X531",
+                            "name": "Corporate downsizing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X582",
+                            "name": "Growing workforce",
+                            "description": ""
+                        },
+                        {
+                            "id": "X240",
+                            "name": "Organizational change management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X533",
+                            "name": "Outsourcing arrangements",
+                            "description": ""
+                        },
+                        {
+                            "id": "X583",
+                            "name": "Workforce changes (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "GOV",
+            "name": "Governance",
+            "children": [
+                {
+                    "id": "X100",
+                    "name": "Advanced technologies & innovations",
+                    "description": "Refers to developing or leveraging emerging technologies and digital innovations that transform business operations and how people live. References to the opportunities and risks presented by these technologies and innovations are included in this topic.",
+                    "children": [
+                        {
+                            "id": "X150",
+                            "name": "Additive manufacturing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X671",
+                            "name": "Advanced & next-generation cellular networks",
+                            "description": ""
+                        },
+                        {
+                            "id": "X755",
+                            "name": "Agricultural technology",
+                            "description": ""
+                        },
+                        {
+                            "id": "X151",
+                            "name": "Distributed ledger technologies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X152",
+                            "name": "Internet of things",
+                            "description": ""
+                        },
+                        {
+                            "id": "X153",
+                            "name": "Nanotechnologies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X821",
+                            "name": "Quantum technologies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X154",
+                            "name": "Remote sensing",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X101",
+                    "name": "Artificial intelligence",
+                    "description": "Refers to computer programs that respond to stimulation, analyze data, and use the resulting insights to make decisions in a way that is consistent with human intelligence and adaptation. It involves new use cases and application ideas, as well as references to concerns about ethical considerations",
+                    "children": [
+                        {
+                            "id": "X170",
+                            "name": "Artificial intelligence (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X172",
+                            "name": "Automated decision making",
+                            "description": ""
+                        },
+                        {
+                            "id": "X173",
+                            "name": "Ethics of AI",
+                            "description": ""
+                        },
+                        {
+                            "id": "X790",
+                            "name": "Immersive technologies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X174",
+                            "name": "Machine learning & deep learning",
+                            "description": ""
+                        },
+                        {
+                            "id": "X789",
+                            "name": "Robotics & unmanned systems",
+                            "description": ""
+                        },
+                        {
+                            "id": "X667",
+                            "name": "Virtual assistants",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X102",
+                    "name": "Board effectiveness",
+                    "description": "Refers to processes aimed at ensuring and evaluating the knowledge, skills and experience of board members, as well as related performance standards. It covers the structure and composition of a board, including diversity, as well its guiding principles and continuity & improvement practices",
+                    "children": [
+                        {
+                            "id": "X183",
+                            "name": "Board assurance framework",
+                            "description": ""
+                        },
+                        {
+                            "id": "X184",
+                            "name": "Board composition & diversity",
+                            "description": ""
+                        },
+                        {
+                            "id": "X185",
+                            "name": "Board effectiveness (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X186",
+                            "name": "Board independence",
+                            "description": ""
+                        },
+                        {
+                            "id": "X187",
+                            "name": "Board succession",
+                            "description": ""
+                        },
+                        {
+                            "id": "X188",
+                            "name": "Directors' knowledge, skills & experience",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X114",
+                    "name": "Business continuity",
+                    "description": "Refers to the plans, actions, protocols and training conducted to ensure continuity of core business operations during and after crises that may disrupt commercial activities. It also covers strategies to adapt business models to actual or potential changes in the external environment.",
+                    "children": [
+                        {
+                            "id": "X189",
+                            "name": "Business continuity planning",
+                            "description": ""
+                        },
+                        {
+                            "id": "X688",
+                            "name": "Business model adaptation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X190",
+                            "name": "Business recovery",
+                            "description": ""
+                        },
+                        {
+                            "id": "X191",
+                            "name": "Crisis management & response",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "RespBiz",
+                    "name": "Business ethics",
+                    "description": "Refers to the guidelines or codes that dictate fair, ethical and moral executive and employee conduct, as well as training on the subject and implementation by staff and management. It also covers ethical standards at the leadership level in decision-making processes.",
+                    "children": [
+                        {
+                            "id": "X193",
+                            "name": "Business ethics (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X196",
+                            "name": "Corporate ethics & conduct guidelines",
+                            "description": ""
+                        },
+                        {
+                            "id": "X194",
+                            "name": "Responsible conduct",
+                            "description": ""
+                        },
+                        {
+                            "id": "X197",
+                            "name": "Workplace ethical training",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X115",
+                    "name": "Business model innovation",
+                    "description": "Refers to new business models realizable through technological advances and increased digital access that provide innovative approaches to redefining traditional service offerings",
+                    "children": [
+                        {
+                            "id": "X198",
+                            "name": "Cloud & edge computing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X199",
+                            "name": "Mobile banking & digital wallets",
+                            "description": ""
+                        },
+                        {
+                            "id": "X200",
+                            "name": "Sharing economy",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ProdLab",
+                    "name": "Certification, labeling & information transparency",
+                    "description": "Refers to the information that companies share with consumers so that they can make informed decisions about the goods and services they purchase, as well as the relevant contractual terms & conditions and applicable rates, for industries where applicable. It also covers independent third-party certifications that verify environmental or social aspects of the products, and associated labeling",
+                    "children": [
+                        {
+                            "id": "X643",
+                            "name": "Product & service information transparency",
+                            "description": ""
+                        },
+                        {
+                            "id": "X337",
+                            "name": "Product certifications",
+                            "description": ""
+                        },
+                        {
+                            "id": "X540",
+                            "name": "Product labeling",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "CChg",
+                    "name": "Climate change risks & management",
+                    "description": "Refers to the physical and transition impacts, risks and opportunities presented by climate change and the transition to a low-carbon economy, as well as adaptation and resilience measures adopted by companies. References to governance systems to manage climate-related risks and opportunities, as well as social considerations related to climate justice and just transition, are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X210",
+                            "name": "Climate change (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X211",
+                            "name": "Climate change adaptation & resilience",
+                            "description": ""
+                        },
+                        {
+                            "id": "X820",
+                            "name": "Climate justice",
+                            "description": ""
+                        },
+                        {
+                            "id": "X212",
+                            "name": "Governance around climate-related risks & opportunities",
+                            "description": ""
+                        },
+                        {
+                            "id": "X213",
+                            "name": "Physical impacts, risks & opportunities",
+                            "description": ""
+                        },
+                        {
+                            "id": "X214",
+                            "name": "Transition impacts, risks & opportunities",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X104",
+                    "name": "Compliance management",
+                    "description": "Refers to the mechanisms that ensure a company's awareness of and compliance with relevant laws, policies, and regulations. It also covers processes to identify and proactively address risks of litigation or regulatory action, and prevent disputes from arising or escalating.",
+                    "children": [
+                        {
+                            "id": "X223",
+                            "name": "Litigation, regulatory action and settlements",
+                            "description": ""
+                        },
+                        {
+                            "id": "X224",
+                            "name": "Regulatory compliance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X543",
+                            "name": "Regulatory gaps, inconsistencies & self-regulation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X227",
+                            "name": "Stricter or new regulations",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X105",
+                    "name": "Corporate criminal liability",
+                    "description": "Refers to the cases in which a legal person is criminally responsible for a criminal offense and the preventative corporate policies, procedures, and processes designed to meet legal compliance obligations and mitigate corruption risks. References to criminal investigations, legal proceedings, and penalties for misconduct are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X544",
+                            "name": "Anti-corruption compliance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X231",
+                            "name": "Anti-money laundering & terrorism financing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X233",
+                            "name": "Bribery",
+                            "description": ""
+                        },
+                        {
+                            "id": "X234",
+                            "name": "Corporate criminal liability (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X235",
+                            "name": "Criminal liability",
+                            "description": ""
+                        },
+                        {
+                            "id": "X236",
+                            "name": "Fraud",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "CorpCult",
+                    "name": "Corporate culture",
+                    "description": "Refers to the fundamental beliefs and guiding principles that dictate behavior within a company and determine how the company's employees and leaders interact and handle business transactions with all stakeholders",
+                    "children": [
+                        {
+                            "id": "X237",
+                            "name": "Core values & guiding principles",
+                            "description": ""
+                        },
+                        {
+                            "id": "X238",
+                            "name": "Corporate culture (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X545",
+                            "name": "Enhancing the employee experience",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "Reput",
+                    "name": "Corporate reputation",
+                    "description": "Refers to how a company presents itself to the outside world regarding performance, particularly on sustainability issues, and strategic decisions. It covers the positive and negative perceptions of stakeholders and associated risks based on the company’s past actions and its perceived ability to deliver value",
+                    "children": [
+                        {
+                            "id": "X241",
+                            "name": "Corporate identity & image",
+                            "description": ""
+                        },
+                        {
+                            "id": "X242",
+                            "name": "Reputation risk",
+                            "description": ""
+                        },
+                        {
+                            "id": "X243",
+                            "name": "Sustainable branding",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X106",
+                    "name": "Cybersecurity & information security",
+                    "description": "Refers to the breakdown or vulnerability of critical information systems and networks due to security breaches, which might disrupt core operations or lead to accidental or illegal access, destruction, alteration or disclosure of protected data. It covers the mechanisms for protecting computers, networks, programs and data, as well as remediation measures if breaches occur",
+                    "children": [
+                        {
+                            "id": "X546",
+                            "name": "Cyber threats",
+                            "description": ""
+                        },
+                        {
+                            "id": "X250",
+                            "name": "Cybersecurity strategy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X252",
+                            "name": "IT disruption",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X107",
+                    "name": "Data privacy management",
+                    "description": "Refers to the collection, storage, processing, usage and sharing of data that is, or might be, connected to an identifiable person, including sensitive personal information. It covers mandatory and voluntary regulations and security mechanisms that aim to protect personal data, as well as instances of violation of individuals' privacy",
+                    "children": [
+                        {
+                            "id": "X689",
+                            "name": "Law enforcement requests for personal data",
+                            "description": ""
+                        },
+                        {
+                            "id": "X253",
+                            "name": "Personal data handling, processing & transferring",
+                            "description": ""
+                        },
+                        {
+                            "id": "X254",
+                            "name": "Personal data protection policies & regulations",
+                            "description": ""
+                        },
+                        {
+                            "id": "X547",
+                            "name": "Privacy violations & data breaches",
+                            "description": ""
+                        },
+                        {
+                            "id": "X256",
+                            "name": "Sensitive personal data management",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X116",
+                    "name": "Digital transformation",
+                    "description": "Refers to the integration and increased use of digital technologies to modify or produce new business processes and improve the experiences of customers and other stakeholders. It alludes to the different cultural environments that embrace or restrict digital innovation, as well as the equal and unrestricted access to internet data and its traffic.",
+                    "children": [
+                        {
+                            "id": "X259",
+                            "name": "Access to digital services",
+                            "description": ""
+                        },
+                        {
+                            "id": "X257",
+                            "name": "Business process automation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X258",
+                            "name": "Data intelligence",
+                            "description": ""
+                        },
+                        {
+                            "id": "X702",
+                            "name": "Network quality & reliability",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "EmAttrac",
+                    "name": "Employee acquisition, talent management & retention",
+                    "description": "Refers to the mechanisms used to find, recruit, manage and retain the right employees and talent to build a skilled workforce and boost business growth, especially in an environment of increasing competition for skills. It also covers the strategic management of outsourced teams, contractors, freelancers or gig workers, as well as efforts to grow employee loyalty and successfully retain staff",
+                    "children": [
+                        {
+                            "id": "X579",
+                            "name": "Competition for talent & building a skilled workforce",
+                            "description": ""
+                        },
+                        {
+                            "id": "X497",
+                            "name": "Employee acquisition",
+                            "description": ""
+                        },
+                        {
+                            "id": "X493",
+                            "name": "Employee retention & turnover",
+                            "description": ""
+                        },
+                        {
+                            "id": "X578",
+                            "name": "Internships",
+                            "description": ""
+                        },
+                        {
+                            "id": "X498",
+                            "name": "Talent management",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ESGgov",
+                    "name": "ESG Governance structure",
+                    "description": "Refers to the governance bodies and organizational structures that define and manage an organization’s ESG strategy, objectives and goals",
+                    "children": [
+                        {
+                            "id": "X288",
+                            "name": "ESG councils & committees",
+                            "description": ""
+                        },
+                        {
+                            "id": "X289",
+                            "name": "ESG governance structure (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X290",
+                            "name": "ESG management",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ClinTri",
+                    "name": "Ethics of clinical trials",
+                    "description": "Refers to ethical and inclusive practices employed when planning and conducting clinical trials. It covers patient involvement, safety, informed consent, incentives to participants, high clinical/laboratory practice standards, as well as diverse representation of those affected by the disease or condition treated.",
+                    "children": [
+                        {
+                            "id": "X649",
+                            "name": "Clinical trials (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ExecComp",
+                    "name": "Executive compensation",
+                    "description": "Refers to financial and non-financial compensation provided to senior management, executives and board members",
+                    "children": [
+                        {
+                            "id": "X291",
+                            "name": "Board compensation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X746",
+                            "name": "ESG metrics in executive compensation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X292",
+                            "name": "Executive & senior management compensation",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "FairComp",
+                    "name": "Fair competition",
+                    "description": "Refers to business and government mechanisms aimed at maintaining healthy marketplaces where all participants compete fairly on a level playing field. It also includes practices that harm the general interests of competition in a corresponding market, by preventing or reducing it.",
+                    "children": [
+                        {
+                            "id": "X361",
+                            "name": "Anti-competitive practices",
+                            "description": ""
+                        },
+                        {
+                            "id": "X363",
+                            "name": "Open & fair competition",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "GeoRsk",
+                    "name": "Geopolitical risks",
+                    "description": "Refers to political and military pressures that may pose risks to business if not handled appropriately by national or subnational governments or agencies.",
+                    "children": [
+                        {
+                            "id": "X405",
+                            "name": "Armed conflict",
+                            "description": ""
+                        },
+                        {
+                            "id": "X787",
+                            "name": "Organized crime & terrorism",
+                            "description": ""
+                        },
+                        {
+                            "id": "X786",
+                            "name": "Political & geopolitical risk",
+                            "description": ""
+                        },
+                        {
+                            "id": "X407",
+                            "name": "Separatism",
+                            "description": ""
+                        },
+                        {
+                            "id": "X567",
+                            "name": "Social movements & unrest",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "HarmSub",
+                    "name": "Harmful substances management",
+                    "description": "Refers to substances and materials used in an organization's operations or present in its products that pose a threat to human health or the environment. References to specific controversial ingredients included in products can be found in the Product & service safety & quality topic.",
+                    "children": [
+                        {
+                            "id": "X410",
+                            "name": "Controversial ingredients & compounds",
+                            "description": ""
+                        },
+                        {
+                            "id": "X372",
+                            "name": "Harmful substances management (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "InnReDev",
+                    "name": "Innovation management",
+                    "description": "Refers to processes, initiatives and activities aimed at the advancement of products and services through various approaches, including open innovation, crowdsourcing and the use of new technologies. Go-to-market strategies and measures to protect a competitive edge and increase market penetration are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X328",
+                            "name": "Open innovation, crowdsourcing & co-creation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X557",
+                            "name": "Product competitive edge & IP strategy",
+                            "description": ""
+                        },
+                        {
+                            "id": "X558",
+                            "name": "Product market penetration & adoption",
+                            "description": ""
+                        },
+                        {
+                            "id": "X556",
+                            "name": "R&D in products & services",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "IntelPty",
+                    "name": "Intellectual property",
+                    "description": "Refers to both the protection of or infringement on exclusive rights given to an individual or legal entity for an idea, invention or creative expression that acquires the status of 'property'. It includes patents, trademarks, copyrights, and trade secrets.",
+                    "children": [
+                        {
+                            "id": "X680",
+                            "name": "Intellectual property (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X330",
+                            "name": "IP infringement, misappropriation & enforcement",
+                            "description": ""
+                        },
+                        {
+                            "id": "X331",
+                            "name": "IP protection",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "InvRlt",
+                    "name": "Investor relations",
+                    "description": "Refers to relationship management and engagement practices between companies and their shareholders, current and potential investors, and financial analysts. The rights and practices of shareholders, including proxy voting, are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X333",
+                            "name": "Investor engagement",
+                            "description": ""
+                        },
+                        {
+                            "id": "X334",
+                            "name": "Shareholder engagement",
+                            "description": ""
+                        },
+                        {
+                            "id": "X335",
+                            "name": "Shareholder rights & actions",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "PlusVal",
+                    "name": "Long-term value creation",
+                    "description": "Refers to a company's processes and practices aimed at optimizing its financial, social and environmental value in the long term.",
+                    "children": [
+                        {
+                            "id": "X347",
+                            "name": "Long-term environmental value",
+                            "description": ""
+                        },
+                        {
+                            "id": "X348",
+                            "name": "Long-term social value",
+                            "description": ""
+                        },
+                        {
+                            "id": "X349",
+                            "name": "Long-term strategies & business models",
+                            "description": ""
+                        },
+                        {
+                            "id": "X350",
+                            "name": "Long-term value creation (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "MatCmAct",
+                    "name": "Materials management",
+                    "description": "Refers to the management of materials, recognizing the reality of resource scarcity where measured usage, increased recycled inputs and reduced virgin resources can contribute to improved environmental conditions. It includes a specific focus on forest products, metals & minerals and plastics, which have wide-reaching value chain impacts as source materials.",
+                    "children": [
+                        {
+                            "id": "X658",
+                            "name": "Forest products",
+                            "description": ""
+                        },
+                        {
+                            "id": "X373",
+                            "name": "Materials management (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X374",
+                            "name": "Recycled materials",
+                            "description": ""
+                        },
+                        {
+                            "id": "X375",
+                            "name": "Resource scarcity & conservation",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "AltAccnt",
+                    "name": "Non-financial reporting",
+                    "description": "Refers to the processes and standards for the accounting, reporting and auditing of non-financial information, including its integration with financial disclosures. References to the actors & ecosystems that support non-financial transparency are also included in this topic.",
+                    "children": [
+                        {
+                            "id": "X379",
+                            "name": "Integrated reporting",
+                            "description": ""
+                        },
+                        {
+                            "id": "X380",
+                            "name": "Non-financial accounting",
+                            "description": ""
+                        },
+                        {
+                            "id": "X381",
+                            "name": "Non-financial assurance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X382",
+                            "name": "Non-financial rankers & raters",
+                            "description": ""
+                        },
+                        {
+                            "id": "X383",
+                            "name": "Non-financial reporting (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X384",
+                            "name": "Non-financial standards & frameworks",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X811",
+                    "name": "Online safety",
+                    "description": "Refers to the threats that exist on the Internet and the negative consequences that affect humans due to the use of new technologies.",
+                    "children": [
+                        {
+                            "id": "X798",
+                            "name": "Digital risks & internet governance",
+                            "description": ""
+                        },
+                        {
+                            "id": "X685",
+                            "name": "Information pluralism & literacy",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "X119",
+                    "name": "Project-based social & environmental impact assessment",
+                    "description": "Refers to the assessments and processes to predict, manage and mitigate potential negative social and environmental impacts of business projects, including addressing community resettlements where unavoidable.",
+                    "children": [
+                        {
+                            "id": "X482",
+                            "name": "Environmental impact assessment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X484",
+                            "name": "Land rights & displacement management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X669",
+                            "name": "Social impact assessment",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "PubPol",
+                    "name": "Public policy practices",
+                    "description": "Refers to the the relationship between companies and governments/ officials and the practices adopted by companies to influence public policy, including lobbying and political contributions. It also includes considerations of the alignment of overt and covert policy positions with corporate values.",
+                    "children": [
+                        {
+                            "id": "X428",
+                            "name": "Government relations & public affairs",
+                            "description": ""
+                        },
+                        {
+                            "id": "X429",
+                            "name": "Lobbying & political contributions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X569",
+                            "name": "Policy positions & values alignment",
+                            "description": ""
+                        },
+                        {
+                            "id": "X431",
+                            "name": "Public policy practices (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ResInv",
+                    "name": "Responsible investing & financing",
+                    "description": "Refers to investment products aimed at producing a specific sustainability-oriented outcome, the financing of projects or companies with an environmental or social benefit, and investing and financing practices specifically geared to making a positive impact.",
+                    "children": [
+                        {
+                            "id": "X439",
+                            "name": "Green investing & financing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X665",
+                            "name": "Impact investing & financing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X440",
+                            "name": "Innovative & thematic financing",
+                            "description": ""
+                        },
+                        {
+                            "id": "X442",
+                            "name": "Responsible investing & financing (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ResPrice",
+                    "name": "Responsible pricing",
+                    "description": "Refers to corporate policies and practices to ensure the pricing of its products is fair, transparent, and non-discriminatory.",
+                    "children": [
+                        {
+                            "id": "X368",
+                            "name": "Responsible pricing (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ResProc",
+                    "name": "Responsible procurement",
+                    "description": "Refers to the policies and practices to procure ethically and responsibly produced goods or services for a fair price.",
+                    "children": [
+                        {
+                            "id": "X445",
+                            "name": "Conflict minerals",
+                            "description": ""
+                        },
+                        {
+                            "id": "X446",
+                            "name": "Procurement policies & criteria",
+                            "description": ""
+                        },
+                        {
+                            "id": "X447",
+                            "name": "Responsible procurement practices",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "TaxPces",
+                    "name": "Responsible tax practices",
+                    "description": "Refers to the taxation of a company's profits and related matters, including state incentives and corporate strategies to reduce the amount of taxes levied or paid, the effective exchange of information with tax authorities, and illegal activities aimed at evading the imposition or payment of a tax.",
+                    "children": [
+                        {
+                            "id": "X449",
+                            "name": "Cross-border taxation",
+                            "description": ""
+                        },
+                        {
+                            "id": "X450",
+                            "name": "Tax evasion",
+                            "description": ""
+                        },
+                        {
+                            "id": "X451",
+                            "name": "Tax planning",
+                            "description": ""
+                        },
+                        {
+                            "id": "X452",
+                            "name": "Tax policies",
+                            "description": ""
+                        },
+                        {
+                            "id": "X453",
+                            "name": "Tax relief",
+                            "description": ""
+                        },
+                        {
+                            "id": "X454",
+                            "name": "Tax transparency & disclosure",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "SolFinMan",
+                    "name": "Solvency & financial management",
+                    "description": "Refers to the regulatory requirements and measures of a bank or other financial institution’s financial strengths and solvency, including stress tests and capital buffers, among others.",
+                    "children": [
+                        {
+                            "id": "X192",
+                            "name": "Solvency & financial management (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "StHEgt",
+                    "name": "Stakeholder engagement",
+                    "description": "Refers to the process of organizing, monitoring, maintaining and improving relationships and communication streams with people or groups who may affect or be affected by a company's activities and decisions.",
+                    "children": [
+                        {
+                            "id": "X473",
+                            "name": "Business partner relationship management",
+                            "description": ""
+                        },
+                        {
+                            "id": "X474",
+                            "name": "Stakeholder dialogue & engagement",
+                            "description": ""
+                        },
+                        {
+                            "id": "X475",
+                            "name": "Stakeholder inclusion (unspecified)",
+                            "description": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "SupChMgt",
+                    "name": "Supply chain management",
+                    "description": "Refers to the policies, practices and goals established by a company that dictate how it chooses suppliers, measures supplier performance and alignment with core and strategic values, audits suppliers, engages with and supports suppliers to improve on ESG issues, and maintains transparency from cradle to gate to ensure sourcing commitments are met.",
+                    "children": [
+                        {
+                            "id": "X704",
+                            "name": "Contractor training & screening",
+                            "description": ""
+                        },
+                        {
+                            "id": "X809",
+                            "name": "Payment practices",
+                            "description": ""
+                        },
+                        {
+                            "id": "X703",
+                            "name": "Supplier diversity",
+                            "description": ""
+                        },
+                        {
+                            "id": "X476",
+                            "name": "Supplier support",
+                            "description": ""
+                        },
+                        {
+                            "id": "X477",
+                            "name": "Supply chain engagement",
+                            "description": ""
+                        },
+                        {
+                            "id": "X478",
+                            "name": "Supply chain goals & commitments",
+                            "description": ""
+                        },
+                        {
+                            "id": "X479",
+                            "name": "Supply chain management (unspecified)",
+                            "description": ""
+                        },
+                        {
+                            "id": "X480",
+                            "name": "Supply chain policies, screening, auditing & corrective actions",
+                            "description": ""
+                        },
+                        {
+                            "id": "X481",
+                            "name": "Supply chain transparency",
+                            "description": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Spills",
+            "target": "Water pollution",
+            "relation": "impacts",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Spills",
+            "target": "Managing land use & reducing deforestation",
+            "relation": "impacts",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Protection of natural land cover",
+            "target": "Managing land use & reducing deforestation",
+            "relation": "mitigates",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Non-hazardous waste management",
+            "target": "Managing land use & reducing deforestation",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Managing land use & reducing deforestation",
+            "target": "Water pollution",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Managing land use & reducing deforestation",
+            "target": "Biodiversity",
+            "relation": "driver_of",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Managing land use & reducing deforestation",
+            "target": "Climate change risks & management",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Water pollution",
+            "target": "Biodiversity",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Air emissions",
+            "target": "Ambient pollution",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Smarter & greener transportation",
+            "target": "Air emissions",
+            "relation": "mitigates",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "GHG emissions & reductions",
+            "target": "Climate change risks & management",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Energy use, conservation & reductions",
+            "target": "GHG emissions & reductions",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Energy use, conservation & reductions",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Transition to renewable energy",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Transition to renewable energy",
+            "target": "Energy use, conservation & reductions",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Transition to renewable energy",
+            "target": "Biodiversity",
+            "relation": "driver_of",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Biotechnology & ethical considerations",
+            "target": "Biodiversity",
+            "relation": "driver_of",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Materials management",
+            "target": "Biodiversity",
+            "relation": "driver_of",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Recycling, waste recovery & reduction",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Plastics management",
+            "target": "Water pollution",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Materials management",
+            "target": "Ambient pollution",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Transition to a circular economy",
+            "target": "Non-hazardous waste management",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Transition to a circular economy",
+            "target": "Energy use, conservation & reductions",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Changing consumption patterns",
+            "target": "Non-hazardous waste management",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Changing consumption patterns",
+            "target": "Climate change risks & management",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Non-hazardous waste management",
+            "target": "Climate change risks & management",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Non-hazardous waste management",
+            "target": "Biodiversity",
+            "relation": "drives",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Physical disasters & failures",
+            "relation": "drives",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Biodiversity",
+            "relation": "impacts",
+            "basis": "ipbes_2019"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Water",
+            "relation": "impacts",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Shifting demographics",
+            "relation": "impacts",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Human rights",
+            "relation": "impacts",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Socio-economic risks",
+            "relation": "drives",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Climate change risks & management",
+            "target": "Consumer nutrition & wellbeing",
+            "relation": "impacts",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Biodiversity",
+            "target": "Consumer nutrition & wellbeing",
+            "relation": "impacts",
+            "basis": "ipbes_2019"
+        },
+        {
+            "source": "Biodiversity",
+            "target": "Water",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Air emissions",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Ambient pollution",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Ambient pollution",
+            "target": "Biodiversity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Water pollution",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Water pollution",
+            "target": "Consumer nutrition & wellbeing",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Hazardous waste management",
+            "target": "Water pollution",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Hazardous waste management",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Drug resistance & pharmaceuticals in the environment",
+            "target": "Water pollution",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Drug resistance & pharmaceuticals in the environment",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Drug resistance & pharmaceuticals in the environment",
+            "target": "Biodiversity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Managing land use & reducing deforestation",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "pdf_diagram"
+        },
+        {
+            "source": "Protection of natural land cover",
+            "target": "Biodiversity",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Protection of natural land cover",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Alternative fuels",
+            "target": "GHG emissions & reductions",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Alternative fuels",
+            "target": "Air emissions",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Sustainable building management",
+            "target": "Energy use, conservation & reductions",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Sustainable building management",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Plastics management",
+            "target": "Biodiversity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee transportation",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee transportation",
+            "target": "Air emissions",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Physical disasters & failures",
+            "target": "Socio-economic risks",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Physical disasters & failures",
+            "target": "Human rights",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Epidemics & their multi-dimensional impacts",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Epidemics & their multi-dimensional impacts",
+            "target": "Socio-economic risks",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Epidemics & their multi-dimensional impacts",
+            "target": "Shifting demographics",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Fair & equitable compensation",
+            "target": "Employee engagement & satisfaction",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee wellbeing",
+            "target": "Employee engagement & satisfaction",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee wellbeing",
+            "target": "Occupational health & safety",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Fair & inclusive workplace",
+            "target": "Innovation management",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Fair & inclusive workplace",
+            "target": "Employee engagement & satisfaction",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Children's rights",
+            "target": "Human rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Labor rights",
+            "target": "Human rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Labor rights",
+            "target": "Compliance management",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Human rights",
+            "target": "Compliance management",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Data privacy management",
+            "target": "Cybersecurity & information security",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Data privacy management",
+            "target": "Compliance management",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Geopolitical risks",
+            "target": "Socio-economic risks",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Geopolitical risks",
+            "target": "Supply chain management",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Supply chain management",
+            "target": "Human rights",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Supply chain management",
+            "target": "Responsible procurement",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Responsible investing & financing",
+            "target": "Climate change risks & management",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Responsible investing & financing",
+            "target": "Long-term value creation",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Non-financial reporting",
+            "target": "Compliance management",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Artificial intelligence",
+            "target": "Digital transformation",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Artificial intelligence",
+            "target": "Future of work",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Digital transformation",
+            "target": "Future of work",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Digital transformation",
+            "target": "Cybersecurity & information security",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Shifting demographics",
+            "target": "Socio-economic risks",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Shifting demographics",
+            "target": "Social inclusion",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Social inclusion",
+            "target": "Human rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Certification, labeling & information transparency",
+            "target": "Consumer rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Certification, labeling & information transparency",
+            "target": "Responsible procurement",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Water",
+            "target": "Biodiversity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Water",
+            "target": "Consumer nutrition & wellbeing",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Water pollution",
+            "target": "Water",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Energy use, conservation & reductions",
+            "target": "Climate change risks & management",
+            "relation": "drives",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "GHG emissions & reductions",
+            "target": "Water",
+            "relation": "impacts",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Sustainable agriculture",
+            "target": "Water pollution",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Sustainable agriculture",
+            "target": "Biodiversity",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Sustainable agriculture",
+            "target": "Managing land use & reducing deforestation",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Deforestation",
+            "target": "Biodiversity",
+            "relation": "drives",
+            "basis": "ipbes_2019"
+        },
+        {
+            "source": "Deforestation",
+            "target": "Climate change risks & management",
+            "relation": "drives",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Forest protection & regrowth",
+            "target": "GHG emissions & reductions",
+            "relation": "mitigates",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Wetlands protection",
+            "target": "Biodiversity",
+            "relation": "contributes_to",
+            "basis": "ipbes_2019"
+        },
+        {
+            "source": "Recycling, waste recovery & reduction",
+            "target": "Non-hazardous waste management",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Recycling, waste recovery & reduction",
+            "target": "Hazardous waste management",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Transition to a circular economy",
+            "target": "GHG emissions & reductions",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Transition to a circular economy",
+            "target": "Materials management",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Materials management",
+            "target": "GHG emissions & reductions",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Plastics management",
+            "target": "Marine pollution",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Smarter & greener transportation",
+            "target": "GHG emissions & reductions",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Smarter & greener transportation",
+            "target": "Ambient pollution",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Transition to renewable energy",
+            "target": "Air emissions",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Transition to renewable energy",
+            "target": "Socio-economic risks",
+            "relation": "mitigates",
+            "basis": "established_science"
+        },
+        {
+            "source": "Spills",
+            "target": "Biodiversity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Spills",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Air emissions",
+            "target": "Climate change risks & management",
+            "relation": "drives",
+            "basis": "ipcc_ar6"
+        },
+        {
+            "source": "Physical disasters & failures",
+            "target": "Business continuity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Biodiversity",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "ipbes_2019"
+        },
+        {
+            "source": "Public health",
+            "target": "Socio-economic risks",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Epidemics & their multi-dimensional impacts",
+            "target": "Business continuity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Occupational health & safety",
+            "target": "Employee wellbeing",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Occupational health & safety",
+            "target": "Employee engagement & satisfaction",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee development",
+            "target": "Employee engagement & satisfaction",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee development",
+            "target": "Future of work",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Employee incentives & benefits",
+            "target": "Employee engagement & satisfaction",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Fair & inclusive workplace",
+            "target": "Social inclusion",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Unionization",
+            "target": "Labor rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Grievance mechanisms & remediation",
+            "target": "Human rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Grievance mechanisms & remediation",
+            "target": "Compliance management",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Community engagement",
+            "target": "Community support & development",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Local economy support",
+            "target": "Social inclusion",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Financial access, literacy & advice",
+            "target": "Social inclusion",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Inclusive products & services",
+            "target": "Social inclusion",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Indigenous populations",
+            "target": "Human rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Modern slavery",
+            "target": "Human rights",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Child labor",
+            "target": "Children's rights",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Access to health care & medicine",
+            "target": "Public health",
+            "relation": "contributes_to",
+            "basis": "who"
+        },
+        {
+            "source": "Holistic & patient-centric approach to health",
+            "target": "Public health",
+            "relation": "contributes_to",
+            "basis": "who"
+        },
+        {
+            "source": "Consumer nutrition & wellbeing",
+            "target": "Public health",
+            "relation": "impacts",
+            "basis": "who"
+        },
+        {
+            "source": "Animal welfare",
+            "target": "Biodiversity",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Cybersecurity & information security",
+            "target": "Compliance management",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Cybersecurity & information security",
+            "target": "Business continuity",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Artificial intelligence",
+            "target": "Innovation management",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Advanced technologies & innovations",
+            "target": "Innovation management",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Digital transformation",
+            "target": "Innovation management",
+            "relation": "drives",
+            "basis": "established_science"
+        },
+        {
+            "source": "Board effectiveness",
+            "target": "Long-term value creation",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Compliance management",
+            "target": "Long-term value creation",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Responsible procurement",
+            "target": "Human rights",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Supply chain management",
+            "target": "Socio-economic risks",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Geopolitical risks",
+            "target": "Market access",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Geopolitical risks",
+            "target": "Business continuity",
+            "relation": "impacts",
+            "basis": "established_science"
+        },
+        {
+            "source": "Innovation management",
+            "target": "Long-term value creation",
+            "relation": "contributes_to",
+            "basis": "established_science"
+        },
+        {
+            "source": "Changing consumption patterns",
+            "target": "Transition to a circular economy",
+            "relation": "drives",
+            "basis": "established_science"
+        }
+    ]
+}
