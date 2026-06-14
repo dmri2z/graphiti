@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "graphiti": {
+      "type": "http",
+      "url": "http://localhost:8000/mcp"
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "playwright",
+        "mcp"
+      ]
+    }
+  }
+}

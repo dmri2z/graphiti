@@ -166,3 +166,6 @@ cache.db*
 
 # All DS_Store files
 .DS_Store
+# editor / local mcp artifacts
+.cursor/
+.playwright-mcp/
