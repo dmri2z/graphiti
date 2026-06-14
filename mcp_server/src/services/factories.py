@@ -112,13 +112,14 @@ def reasoning_effort_for_model(model: str) -> str | None:
 
     Reasoning models (o1, o3, gpt-5 family) need an effort; non-reasoning models
     must not receive one. gpt-5.5 runs with reasoning off ('none') for lower
-    cost/latency (comparable extraction quality); earlier reasoning models keep
-    the cheapest broadly-supported tier ('minimal'). Shared by the OpenAI and
-    Azure OpenAI factory branches so both providers select effort identically.
+    cost/latency. Every other reasoning model uses 'low' — the cheapest effort
+    that is accepted across o1/o3 and the gpt-5 family. ('minimal' is rejected
+    with a 400 by o1/o3 and by gpt-5.4, so it is not used.) Shared by the OpenAI
+    and Azure OpenAI factory branches so both providers select effort identically.
     """
     if not model.startswith(('o1', 'o3', 'gpt-5')):
         return None
-    return 'none' if model.startswith('gpt-5.5') else 'minimal'
+    return 'none' if model.startswith('gpt-5.5') else 'low'
 
 
 class LLMClientFactory:
