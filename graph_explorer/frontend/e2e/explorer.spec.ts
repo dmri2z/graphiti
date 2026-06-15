@@ -51,11 +51,18 @@ test.describe('Graph Explorer', () => {
     expect(n).toBeGreaterThan(0);
   });
 
-  test('semantic search returns ontology matches (guards embedding dims)', async ({ page }) => {
+  test('semantic search returns ontology matches (guards embedding dims)', async ({ page, request }) => {
+    // Semantic search needs a server-side embedder (OPENAI_API_KEY). Skip cleanly
+    // where it isn't configured (e.g. fork CI with no secret) rather than fail.
+    const apiBase = process.env.E2E_API_BASE || 'http://localhost:8001';
+    const health = await (await request.get(`${apiBase}/api/health`)).json();
+    test.skip(!health.semantic_search, 'semantic search not configured (no embedder)');
+
     await page.goto('/');
     await page.waitForResponse((r) => r.url().includes('/api/graph') && r.status() === 200);
 
-    await page.getByRole('button', { name: 'Semantic' }).click();
+    // Server-side node search mode (labelled "Semantic" or "Hybrid" across versions).
+    await page.getByRole('button', { name: /^(Semantic|Hybrid)$/ }).click();
     await page.getByPlaceholder('Search nodes…').fill('carbon emissions reduction targets');
 
     const searchResponse = page.waitForResponse((r) => r.url().includes('/api/search'));

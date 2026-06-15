@@ -1,0 +1,148 @@
+name: Graph Explorer E2E
+
+# Builds the explorer frontend and runs Playwright end-to-end tests against the
+# real stack: frontend -> FastAPI backend -> FalkorDB seeded with the ESG ontology.
+# The OpenAI key (for ontology embeddings + semantic search) comes from the
+# `development` GitHub environment; fork PRs get no secrets, so the e2e job
+# self-skips and the type-check/build job still guards the frontend.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "graph_explorer/**"
+      - "mcp_server/config/ontology.json"
+      - "mcp_server/ingest_ontology.py"
+      - ".github/workflows/graph-explorer-e2e.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "graph_explorer/**"
+      - "mcp_server/config/ontology.json"
+      - "mcp_server/ingest_ontology.py"
+      - ".github/workflows/graph-explorer-e2e.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: graph-explorer-e2e-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # No DB / no secrets — always runs, guards type errors and the production build.
+  frontend-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: graph_explorer/frontend
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: graph_explorer/frontend/package-lock.json
+      - run: npm ci
+      - name: Type-check and build
+        run: npm run build
+
+  e2e:
+    runs-on: depot-ubuntu-22.04
+    environment: development
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      FALKORDB_URI: redis://localhost:6379
+      FALKORDB_DATABASE: default_db
+      EMBEDDER_MODEL: text-embedding-3-small
+      EMBEDDING_DIM: "1536"
+      E2E_API_BASE: http://localhost:8001
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Check for OpenAI key
+        id: keycheck
+        run: |
+          if [ -n "$OPENAI_API_KEY" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "No OPENAI_API_KEY (fork PR) — skipping e2e; frontend-build still guards the UI."
+          fi
+
+      - name: Set up Python
+        if: steps.keycheck.outputs.present == 'true'
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.10"
+      - name: Install uv
+        if: steps.keycheck.outputs.present == 'true'
+        uses: astral-sh/setup-uv@caf0cab7a618c569241d31dcd442f54681755d39 # v3
+        with:
+          version: "latest"
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        if: steps.keycheck.outputs.present == 'true'
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: graph_explorer/frontend/package-lock.json
+
+      - name: Start FalkorDB
+        # Host network: bridge-network NAT on the depot runner pool silently drops
+        # packets to published service-container ports (see mcp-server-tests.yml).
+        if: steps.keycheck.outputs.present == 'true'
+        run: docker run -d --name falkordb --network host falkordb/falkordb:latest
+      - name: Wait for FalkorDB
+        if: steps.keycheck.outputs.present == 'true'
+        run: |
+          for i in $(seq 1 30); do
+            if docker exec falkordb redis-cli ping 2>/dev/null | grep -q PONG; then
+              echo "falkordb ready after ${i}s"; break
+            fi
+            if [ "$i" -eq 30 ]; then echo "falkordb not ready in 30s" >&2; docker logs falkordb; exit 1; fi
+            sleep 1
+          done
+
+      - name: Ingest ESG ontology into default_db
+        if: steps.keycheck.outputs.present == 'true'
+        working-directory: mcp_server
+        run: |
+          uv sync --quiet
+          uv run python ingest_ontology.py
+
+      - name: Start backend (:8001)
+        if: steps.keycheck.outputs.present == 'true'
+        working-directory: graph_explorer/backend
+        run: |
+          uv sync --quiet
+          nohup uv run uvicorn app:app --host 127.0.0.1 --port 8001 > /tmp/backend.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8001/api/health >/dev/null; then echo "backend ready after ${i}s"; break; fi
+            if [ "$i" -eq 30 ]; then echo "backend not ready" >&2; cat /tmp/backend.log; exit 1; fi
+            sleep 1
+          done
+
+      - name: Install frontend deps + Playwright browser
+        if: steps.keycheck.outputs.present == 'true'
+        working-directory: graph_explorer/frontend
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Run Playwright e2e
+        if: steps.keycheck.outputs.present == 'true'
+        working-directory: graph_explorer/frontend
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: steps.keycheck.outputs.present == 'true' && !cancelled()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: playwright-report
+          path: |
+            graph_explorer/frontend/playwright-report
+            graph_explorer/frontend/test-results
+          retention-days: 7
+          if-no-files-found: ignore
