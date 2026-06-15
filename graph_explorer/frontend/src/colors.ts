@@ -18,9 +18,23 @@ export const TYPE_COLORS: Record<string, string> = {
 
 export const FALLBACK_COLOR = '#94a3b8';
 
-export function colorForType(type: string): string {
-  return TYPE_COLORS[type] ?? FALLBACK_COLOR;
+// Deterministic color for entity types not in the curated palette, so each new
+// type (e.g. Publication) gets a stable, distinct swatch across reloads instead
+// of all sharing one gray. Hue derived from a string hash; fixed S/L keep the
+// swatches legible alongside the curated colors.
+function generatedColor(type: string): string {
+  let hash = 0;
+  for (let i = 0; i < type.length; i++) {
+    hash = (hash * 31 + type.charCodeAt(i)) | 0;
+  }
+  const hue = ((hash % 360) + 360) % 360;
+  return `hsl(${hue}, 65%, 45%)`;
 }
 
-// Order shown in the legend.
+export function colorForType(type: string): string {
+  if (!type) return FALLBACK_COLOR;
+  return TYPE_COLORS[type] ?? generatedColor(type);
+}
+
+// Curated palette order — known types lead the legend in this order.
 export const LEGEND_TYPES = Object.keys(TYPE_COLORS);

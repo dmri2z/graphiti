@@ -3,13 +3,15 @@ import GraphView from './components/GraphView';
 import SearchBar from './components/SearchBar';
 import Legend from './components/Legend';
 import DetailDialog from './components/DetailDialog';
+import FactsPanel from './components/FactsPanel';
 import {
   SemanticUnavailableError,
   fetchGraph,
   fetchGroups,
-  semanticSearch,
+  hybridSearch,
+  searchFacts,
 } from './api';
-import type { GraphData, GraphNode, SearchMode, Selected } from './types';
+import type { GraphData, GraphLink, GraphNode, SearchMode, Selected } from './types';
 
 const EMPTY: GraphData = { nodes: [], edges: [] };
 
@@ -19,7 +21,8 @@ export default function App() {
   const [data, setData] = useState<GraphData>(EMPTY);
   const [query, setQuery] = useState('');
   const [mode, setMode] = useState<SearchMode>('text');
-  const [semanticIds, setSemanticIds] = useState<Set<string>>(new Set());
+  const [hybridIds, setHybridIds] = useState<Set<string>>(new Set());
+  const [factEdges, setFactEdges] = useState<GraphLink[]>([]);
   const [hiddenTypes, setHiddenTypes] = useState<Set<string>>(new Set());
   const [selected, setSelected] = useState<Selected>(null);
   const [status, setStatus] = useState<string>('');
@@ -47,7 +50,8 @@ export default function App() {
     if (!selectedGroup) return;
     setStatus('Loading graph…');
     setData(EMPTY);
-    setSemanticIds(new Set());
+    setHybridIds(new Set());
+    setFactEdges([]);
     fetchGraph(selectedGroup)
       .then((g) => {
         setData(g);
@@ -66,9 +70,10 @@ export default function App() {
     [data.nodes]
   );
 
-  // Compute matched node ids for the current query/mode.
+  // Matched node ids — only for node-targeting modes (text/hybrid). Facts targets edges.
   const matchedIds = useMemo(() => {
-    if (mode === 'semantic') return semanticIds;
+    if (mode === 'facts') return new Set<string>();
+    if (mode === 'hybrid') return hybridIds;
     const q = query.trim().toLowerCase();
     if (!q) return new Set<string>();
     const matches = new Set<string>();
@@ -77,26 +82,59 @@ export default function App() {
       if (hay.includes(q)) matches.add(n.id);
     }
     return matches;
-  }, [mode, query, semanticIds, data.nodes]);
+  }, [mode, query, hybridIds, data.nodes]);
+
+  const matchedEdgeIds = useMemo(
+    () => new Set(factEdges.map((e) => e.id)),
+    [factEdges]
+  );
+
+  const factSearchActive = mode === 'facts' && factEdges.length > 0;
 
   const searchActive =
     (mode === 'text' && query.trim().length > 0) ||
-    (mode === 'semantic' && semanticIds.size > 0);
+    (mode === 'hybrid' && hybridIds.size > 0) ||
+    factSearchActive;
 
-  const matchCount = searchActive ? matchedIds.size : null;
+  const matchCount = !searchActive
+    ? null
+    : mode === 'facts'
+      ? factEdges.length
+      : matchedIds.size;
 
-  const runSemantic = async () => {
+  const runHybrid = async () => {
     const q = query.trim();
     if (!q || !selectedGroup) return;
     setSearching(true);
     setStatus('Searching…');
     try {
-      const ids = await semanticSearch(selectedGroup, q);
-      setSemanticIds(new Set(ids));
-      setStatus(ids.length === 0 ? 'No semantic matches.' : '');
+      const ids = await hybridSearch(selectedGroup, q);
+      setHybridIds(new Set(ids));
+      setStatus(ids.length === 0 ? 'No matches.' : '');
     } catch (e) {
       if (e instanceof SemanticUnavailableError) {
-        setStatus('Semantic search unavailable (no API key) — switched to text mode.');
+        setStatus('Hybrid search unavailable (no API key) — switched to text mode.');
+        setMode('text');
+      } else {
+        setStatus(`Search error: ${(e as Error).message}`);
+      }
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const runFacts = async () => {
+    const q = query.trim();
+    if (!q || !selectedGroup) return;
+    setSearching(true);
+    setStatus('Searching facts…');
+    try {
+      const edges = await searchFacts(selectedGroup, q);
+      setFactEdges(edges);
+      setStatus(edges.length === 0 ? 'No matching facts.' : '');
+    } catch (e) {
+      if (e instanceof SemanticUnavailableError) {
+        setStatus('Facts search unavailable (no API key) — switched to text mode.');
         setMode('text');
       } else {
         setStatus(`Search error: ${(e as Error).message}`);
@@ -107,7 +145,8 @@ export default function App() {
   };
 
   const onSubmit = () => {
-    if (mode === 'semantic') runSemantic();
+    if (mode === 'hybrid') runHybrid();
+    else if (mode === 'facts') runFacts();
   };
 
   const toggleType = (t: string) => {
@@ -127,12 +166,15 @@ export default function App() {
         query={query}
         onQueryChange={(q) => {
           setQuery(q);
-          if (mode === 'semantic') setSemanticIds(new Set());
+          // Stale server results once the query text diverges.
+          setHybridIds(new Set());
+          setFactEdges([]);
         }}
         mode={mode}
         onModeChange={(m) => {
           setMode(m);
-          setSemanticIds(new Set());
+          setHybridIds(new Set());
+          setFactEdges([]);
         }}
         onSubmit={onSubmit}
         matchCount={matchCount}
@@ -143,13 +185,22 @@ export default function App() {
         <GraphView
           data={data}
           matchedIds={matchedIds}
+          matchedEdgeIds={matchedEdgeIds}
           searchActive={searchActive}
+          factSearchActive={factSearchActive}
           hiddenTypes={hiddenTypes}
           onSelect={setSelected}
           width={size.w}
           height={size.h}
         />
         <Legend presentTypes={presentTypes} hiddenTypes={hiddenTypes} onToggle={toggleType} />
+        {mode === 'facts' && factEdges.length > 0 && (
+          <FactsPanel
+            facts={factEdges}
+            nodeById={nodeById as Map<string, GraphNode>}
+            onSelect={setSelected}
+          />
+        )}
         {status && <div className="status">{status}</div>}
       </div>
 

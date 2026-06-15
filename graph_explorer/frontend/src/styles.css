@@ -164,6 +164,66 @@ body,
   flex: 0 0 12px;
 }
 
+/* ---- facts panel ---- */
+.facts-panel {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 320px;
+  max-height: 80%;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.facts-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.facts-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: none;
+  border-left: 3px solid #f59e0b;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 6px 8px;
+  border-radius: 0 4px 4px 0;
+  color: #0f172a;
+}
+
+.facts-item:hover {
+  background: #f1f5f9;
+}
+
+.facts-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.facts-fact {
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.facts-ends {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
 /* ---- dialog ---- */
 .dialog-backdrop {
   position: fixed;

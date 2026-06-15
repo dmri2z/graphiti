@@ -2,7 +2,9 @@
 `default_db` (public) graph.
 
 Creates one ESGTopic node per taxonomy entry (3 pillars -> categories -> leaf
-topics) and one HAS_SUBTOPIC relationship per parent->child link.
+topics), one HAS_SUBTOPIC relationship per parent->child link, and one semantic
+relationship per entry in the ontology's `relationships` list (impacts, drives,
+mitigates, driver_of, contributes_to).
 
 Deterministic & idempotent: node/edge UUIDs are derived from the topic ids via
 uuid5, so re-running MERGEs onto the same elements instead of duplicating. This
@@ -45,6 +47,10 @@ def topic_uuid(topic_id: str) -> str:
 
 def edge_uuid(parent_id: str, child_id: str) -> str:
     return str(uuid5(NAMESPACE_URL, f'has_subtopic:{parent_id}->{child_id}'))
+
+
+def relation_edge_uuid(relation: str, src_id: str, tgt_id: str) -> str:
+    return str(uuid5(NAMESPACE_URL, f'{relation}:{src_id}->{tgt_id}'))
 
 
 def flatten(taxonomy: list[dict]) -> list[dict]:
@@ -96,9 +102,11 @@ async def main() -> None:
     port = parsed.port or 6379
     password = os.environ.get('FALKORDB_PASSWORD') or None
 
-    taxonomy = json.loads(ONTOLOGY_PATH.read_text())['taxonomy']
+    ontology = json.loads(ONTOLOGY_PATH.read_text())
+    taxonomy = ontology['taxonomy']
+    relationships = ontology.get('relationships', [])
     topics = flatten(taxonomy)
-    print(f'Loaded {len(topics)} topics from {ONTOLOGY_PATH.name}')
+    print(f'Loaded {len(topics)} topics, {len(relationships)} relationships from {ONTOLOGY_PATH.name}')
 
     embedder = OpenAIEmbedder(
         OpenAIEmbedderConfig(
@@ -125,6 +133,14 @@ async def main() -> None:
             },
         )
 
+    # Resolve topic names to ids. Names are mostly unique; on collision keep the
+    # lowest-level (most general) node, since relation endpoints are categories.
+    name_to_id: dict[str, str] = {}
+    for t in topics:
+        existing = name_to_id.get(t['name'])
+        if existing is None or t['level'] < nodes[existing].attributes['level']:
+            name_to_id[t['name']] = t['id']
+
     # Build parent->child HAS_SUBTOPIC edges.
     now = utc_now()
     edges: list[EntityEdge] = []
@@ -145,6 +161,32 @@ async def main() -> None:
             )
         )
 
+    # Build cross-topic semantic edges (impacts, drives, mitigates, ...).
+    subtopic_count = len(edges)
+    for rel in relationships:
+        src_id = name_to_id.get(rel['source'])
+        tgt_id = name_to_id.get(rel['target'])
+        if src_id is None or tgt_id is None:
+            missing = rel['source'] if src_id is None else rel['target']
+            print(f'  WARNING: skipping relation, unknown topic {missing!r}: {rel}')
+            continue
+        src = nodes[src_id]
+        tgt = nodes[tgt_id]
+        relation = rel['relation']
+        edges.append(
+            EntityEdge(
+                uuid=relation_edge_uuid(relation, src_id, tgt_id),
+                source_node_uuid=src.uuid,
+                target_node_uuid=tgt.uuid,
+                name=relation.upper(),
+                fact=f'{src.name} {relation.replace("_", " ")} {tgt.name}',
+                group_id=GROUP_ID,
+                created_at=now,
+                attributes={'relation': relation, 'basis': rel.get('basis', '')},
+            )
+        )
+    relation_count = len(edges) - subtopic_count
+
     # Embeddings (batched).
     print(f'Embedding {len(nodes)} node names + {len(edges)} edge facts...')
     node_list = list(nodes.values())
@@ -162,13 +204,16 @@ async def main() -> None:
         for node in node_list:
             await node.save(driver)
 
-        print(f'Saving {len(edges)} HAS_SUBTOPIC edges...')
+        print(f'Saving {subtopic_count} HAS_SUBTOPIC + {relation_count} relation edges...')
         for edge in edges:
             await edge.save(driver)
     finally:
         await driver.close()
 
-    print(f'Done. {len(node_list)} nodes, {len(edges)} edges in graph "{DATABASE}".')
+    print(
+        f'Done. {len(node_list)} nodes, {subtopic_count} HAS_SUBTOPIC edges, '
+        f'{relation_count} relation edges in graph "{DATABASE}".'
+    )
 
 
 if __name__ == '__main__':

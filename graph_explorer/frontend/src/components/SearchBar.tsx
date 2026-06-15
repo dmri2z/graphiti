@@ -39,7 +39,7 @@ export default function SearchBar({
 
       <input
         type="text"
-        placeholder="Search nodes…"
+        placeholder={mode === 'facts' ? 'Search facts…' : 'Search nodes…'}
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
         onKeyDown={(e) => {
@@ -56,15 +56,22 @@ export default function SearchBar({
           Text
         </button>
         <button
-          className={mode === 'semantic' ? 'active' : ''}
-          onClick={() => onModeChange('semantic')}
-          title="Embeddings + keyword search on the server"
+          className={mode === 'hybrid' ? 'active' : ''}
+          onClick={() => onModeChange('hybrid')}
+          title="Keyword (BM25) + vector search on the server"
         >
-          Semantic
+          Hybrid
+        </button>
+        <button
+          className={mode === 'facts' ? 'active' : ''}
+          onClick={() => onModeChange('facts')}
+          title="Hybrid search over facts (relationships) on the server"
+        >
+          Facts
         </button>
       </div>
 
-      {mode === 'semantic' && (
+      {mode !== 'text' && (
         <button className="go" onClick={onSubmit} disabled={loading}>
           {loading ? '…' : 'Search'}
         </button>

@@ -7,8 +7,11 @@ independently of `mcp_server` — it only reads the same FalkorDB/Neo4j database
   `{nodes, edges}` as JSON. Browsers can't talk Redis/Bolt directly, so this is the bridge.
 - **Frontend** (`frontend/`): React + Vite + `react-force-graph` force-directed display.
   - Nodes colored by entity type (Organization, ESGTopic, Regulation, …) + Episodic.
-  - Search bar with **text** (instant, client-side) and **semantic** (server-side embeddings) modes.
-  - Searching highlights matched nodes; their neighbours go grey, everything else fades.
+  - Search bar with three modes:
+    - **Text** — instant, client-side substring match over loaded nodes.
+    - **Hybrid** — server-side BM25 keyword + vector search over nodes (`NODE_HYBRID_SEARCH_RRF`).
+    - **Facts** — server-side hybrid search over facts/relationships (`EDGE_HYBRID_SEARCH_RRF`). Matching edges glow amber and a side panel lists each fact; click one to open its detail dialog.
+  - Node search highlights matched nodes; their neighbours go grey, everything else fades.
   - Click/hover a node or edge → dialog with full details.
   - Legend chips toggle entity types on/off.
 
@@ -37,8 +40,9 @@ curl localhost:8001/api/groups
 curl 'localhost:8001/api/graph?group_id=default_db&limit=500'
 ```
 
-Semantic search needs `OPENAI_API_KEY` set in `.env`; without it the `/api/search`
-endpoint returns 503 and the UI falls back to text search.
+Hybrid and Facts search need `OPENAI_API_KEY` set in `.env`; without it the
+`/api/search` and `/api/search-facts` endpoints return 503 and the UI falls back
+to text search.
 
 ### 2. Frontend (port 5173)
 
@@ -62,5 +66,5 @@ Backend reads env vars (see `backend/.env.example`):
 | `FALKORDB_DATABASE` | `default_db` | FalkorDB graph name |
 | `NEO4J_URI` / `NEO4J_USER` / `NEO4J_PASSWORD` | — | Neo4j connection |
 | `GRAPHITI_GROUP_ID` | `default_db` | group shown first |
-| `OPENAI_API_KEY` | — | enables semantic search |
+| `OPENAI_API_KEY` | — | enables hybrid + facts search |
 | `FRONTEND_ORIGIN` | `http://localhost:5173` | CORS allow-origin |

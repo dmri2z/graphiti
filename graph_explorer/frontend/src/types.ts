@@ -38,7 +38,7 @@ export interface GraphData {
   edges: GraphLink[];
 }
 
-export type SearchMode = 'text' | 'semantic';
+export type SearchMode = 'text' | 'hybrid' | 'facts';
 
 export type Selected =
   | { kind: 'node'; data: GraphNode }

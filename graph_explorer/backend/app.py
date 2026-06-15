@@ -93,3 +93,18 @@ async def search(
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f'Search error: {exc}') from exc
     return {'node_ids': node_ids}
+
+
+@app.get('/api/search-facts')
+async def search_facts(
+    group_id: str = Query(...),
+    q: str = Query(..., min_length=1),
+    max_facts: int = Query(25, ge=1, le=200),
+):
+    try:
+        facts = await app.state.searcher.search_fact_edges(q, group_id, max_facts=max_facts)
+    except SemanticSearchUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f'Search error: {exc}') from exc
+    return {'facts': facts}

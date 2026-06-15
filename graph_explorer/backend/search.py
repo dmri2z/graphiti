@@ -8,6 +8,8 @@ from graphiti_core import Graphiti
 from graphiti_core.driver.driver import GraphDriver
 from graphiti_core.search.search_config_recipes import NODE_HYBRID_SEARCH_RRF
 
+from graph import _entity_edge_json
+
 
 class SemanticSearchUnavailable(Exception):
     """Raised when no embedder is configured, so semantic search cannot run."""
@@ -54,3 +56,19 @@ class SemanticSearcher:
         )
         nodes = results.nodes[:max_nodes] if results.nodes else []
         return [n.uuid for n in nodes]
+
+    async def search_fact_edges(
+        self, query: str, group_id: str, max_facts: int = 25
+    ) -> list[dict]:
+        """Hybrid search over facts (entity edges). Returns edge JSON for the frontend.
+
+        client.search() defaults to EDGE_HYBRID_SEARCH_RRF (BM25 + vector via RRF)
+        and returns list[EntityEdge] — the same call the MCP search_memory_facts uses.
+        """
+        client = self._get_client()
+        edges = await client.search(
+            query=query,
+            group_ids=[group_id],
+            num_results=max_facts,
+        )
+        return [_entity_edge_json(e) for e in edges]

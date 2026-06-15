@@ -6,7 +6,9 @@ import { colorForType } from '../colors';
 interface Props {
   data: GraphData;
   matchedIds: Set<string>;
+  matchedEdgeIds: Set<string>;
   searchActive: boolean;
+  factSearchActive: boolean;
   hiddenTypes: Set<string>;
   onSelect: (sel: Selected) => void;
   width: number;
@@ -20,7 +22,9 @@ function endId(end: string | GraphNode): string {
 export default function GraphView({
   data,
   matchedIds,
+  matchedEdgeIds,
   searchActive,
+  factSearchActive,
   hiddenTypes,
   onSelect,
   width,
@@ -42,18 +46,23 @@ export default function GraphView({
     return { nodes, links: edges.map((e) => ({ ...e })) };
   }, [data, hiddenTypes]);
 
-  // One-hop neighbours of any matched node — kept "greyish" during search.
+  // Nodes kept "greyish" (not faded) during search. For node search: one-hop
+  // neighbours of matched nodes. For facts search: both endpoints of matched edges.
   const neighborIds = useMemo(() => {
     if (!searchActive) return new Set<string>();
     const set = new Set<string>();
     for (const l of graph.links) {
       const s = endId(l.source);
       const t = endId(l.target);
+      if (factSearchActive && matchedEdgeIds.has(l.id)) {
+        set.add(s);
+        set.add(t);
+      }
       if (matchedIds.has(s)) set.add(t);
       if (matchedIds.has(t)) set.add(s);
     }
     return set;
-  }, [graph.links, matchedIds, searchActive]);
+  }, [graph.links, matchedIds, matchedEdgeIds, searchActive, factSearchActive]);
 
   const adjacency = useMemo(() => {
     const map = new Map<string, Set<string>>();
@@ -140,6 +149,8 @@ export default function GraphView({
     (link: GraphLink) => {
       const s = endId(link.source);
       const t = endId(link.target);
+      // Facts search: matched edges glow amber.
+      if (factSearchActive && matchedEdgeIds.has(link.id)) return '#f59e0b';
       const hovered = link.id === hoverLink || (hoverNode && (s === hoverNode || t === hoverNode));
       if (hovered) return link.kind === 'MENTIONS' ? '#94a3b8' : '#475569';
       const active = searchActive || hoverNode;
@@ -149,7 +160,7 @@ export default function GraphView({
       }
       return link.kind === 'MENTIONS' ? 'rgba(148,163,184,0.35)' : 'rgba(100,116,139,0.5)';
     },
-    [hoverLink, hoverNode, searchActive, matchedIds]
+    [hoverLink, hoverNode, searchActive, matchedIds, factSearchActive, matchedEdgeIds]
   );
 
   return (
@@ -165,7 +176,9 @@ export default function GraphView({
       nodeCanvasObject={drawNode}
       nodePointerAreaPaint={drawNodePointerArea}
       linkColor={linkColor}
-      linkWidth={(l: GraphLink) => (l.id === hoverLink ? 2 : 1)}
+      linkWidth={(l: GraphLink) =>
+        factSearchActive && matchedEdgeIds.has(l.id) ? 2.5 : l.id === hoverLink ? 2 : 1
+      }
       linkLineDash={(l: GraphLink) => (l.kind === 'MENTIONS' ? [3, 3] : null)}
       linkDirectionalArrowLength={(l: GraphLink) => (l.kind === 'RELATES_TO' ? 3 : 0)}
       linkDirectionalArrowRelPos={1}

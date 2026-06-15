@@ -1,4 +1,4 @@
-import { LEGEND_TYPES, colorForType } from '../colors';
+import { LEGEND_TYPES, TYPE_COLORS, colorForType } from '../colors';
 
 interface Props {
   presentTypes: Set<string>;
@@ -7,7 +7,11 @@ interface Props {
 }
 
 export default function Legend({ presentTypes, hiddenTypes, onToggle }: Props) {
-  const types = LEGEND_TYPES.filter((t) => presentTypes.has(t));
+  // Every type present in the loaded graph: curated palette order first, then
+  // any remaining (dynamically discovered) types sorted alphabetically.
+  const known = LEGEND_TYPES.filter((t) => presentTypes.has(t));
+  const extra = [...presentTypes].filter((t) => !TYPE_COLORS[t]).sort();
+  const types = [...known, ...extra];
   if (types.length === 0) return null;
 
   return (
