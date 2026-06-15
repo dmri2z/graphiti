@@ -50,7 +50,7 @@ done
 cd "$HERE/frontend"
 [ -d node_modules ] || { echo "Installing frontend deps (npm install)…"; npm install; }
 echo "Starting frontend on :$FRONTEND_PORT"
-VITE_API_BASE="${VITE_API_BASE:-http://localhost:$BACKEND_PORT}" \
+VITE_API_BASE="${VITE_API_BASE:-http://localhost:$BACKEND_PORT/api}" \
   npm run dev -- --port "$FRONTEND_PORT" &
 frontend_pid=$!
 
