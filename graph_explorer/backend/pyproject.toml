@@ -11,11 +11,6 @@ dependencies = [
     "python-dotenv>=1.0.0",
 ]
 
-# Use the local graphiti_core from this repo so the explorer always matches the
-# code that wrote the graph (instead of a pinned PyPI release).
-[tool.uv.sources]
-graphiti-core = { path = "../..", editable = true }
-
 [tool.ruff]
 line-length = 100
 
