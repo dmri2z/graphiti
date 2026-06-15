@@ -1,6 +1,10 @@
 import type { GraphData, GraphLink } from './types';
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8001';
+// Unset VITE_API_BASE → '' → same-origin relative /api paths. On Railway the
+// preview server proxies /api to the backend over the private network (see
+// vite.config.ts), so the browser never touches a *.railway.internal address.
+// Local dev sets VITE_API_BASE explicitly in run.sh.
+const API_BASE = import.meta.env.VITE_API_BASE ?? '';
 
 export interface GroupsResponse {
   groups: string[];

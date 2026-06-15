@@ -4,6 +4,10 @@
       "type": "http",
       "url": "http://localhost:8000/mcp"
     },
+    "graphiti-remote": {
+      "type": "http",
+      "url": "https://graphiti.up.railway.app/mcp"
+    },
     "playwright": {
       "type": "stdio",
       "command": "npx",
