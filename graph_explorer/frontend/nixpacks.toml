@@ -1,0 +1,20 @@
+# Nixpacks config for the Railway frontend service.
+# Installs both Node.js (vite preview) and Python (FastAPI backend) so both
+# run in the same container — the vite proxy forwards /api to localhost:8001.
+
+[phases.setup]
+nixPkgs = ["python312", "nodejs_20", "uv"]
+
+[phases.install]
+cmds = [
+  "npm ci",
+  "(cd ../backend && uv sync --no-dev --frozen)"
+]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+# Start uvicorn in background (subshell so cwd stays in frontend/), then
+# start vite preview in foreground on Railway's $PORT.
+cmd = "sh -c '(cd ../backend && uv run uvicorn app:app --host 127.0.0.1 --port 8001) & npm run preview'"
