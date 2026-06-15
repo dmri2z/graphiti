@@ -1,30 +1,27 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// On Railway, default to the backend service private URL. Override with
+// BACKEND_INTERNAL_URL env var in the Railway frontend service settings.
+const onRailway = Boolean(process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID);
+const backendTarget =
+  process.env.BACKEND_INTERNAL_URL ||
+  (onRailway ? 'http://backend.railway.internal:8080' : 'http://localhost:8001');
+
+const apiProxy = {
+  '/api': { target: backendTarget, changeOrigin: true },
+};
+
 export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    proxy: {
-      '/api': {
-        target: process.env.BACKEND_INTERNAL_URL || 'http://localhost:8001',
-        changeOrigin: true,
-      },
-    },
+    proxy: apiProxy,
   },
   preview: {
-    host: true, // bind 0.0.0.0 so Railway's proxy can reach the container
-    port: Number(process.env.PORT) || 4173, // honor Railway-injected $PORT
-    allowedHosts: true, // accept the *.up.railway.app Host header
-    proxy: {
-      // Forward /api to the backend over Railway's private network so the
-      // browser only ever hits this app's own public origin (no CORS, backend
-      // stays private). Set BACKEND_INTERNAL_URL to the backend's
-      // *.railway.internal address; defaults to local backend for `npm run preview`.
-      '/api': {
-        target: process.env.BACKEND_INTERNAL_URL || 'http://localhost:8001',
-        changeOrigin: true,
-      },
-    },
+    host: true,
+    port: Number(process.env.PORT) || 4173,
+    allowedHosts: true,
+    proxy: apiProxy,
   },
 });
