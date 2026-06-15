@@ -20,6 +20,7 @@ from graphiti_core.nodes import EntityNode, EpisodeType, SagaNode
 from graphiti_core.search.search_filters import SearchFilters
 from graphiti_core.utils.maintenance.graph_data_operations import clear_data
 from mcp.server.fastmcp import Context, FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 from pydantic import BaseModel
 from starlette.responses import JSONResponse
 
@@ -1248,6 +1249,17 @@ async def initialize_server() -> ServerConfig:
         mcp.settings.host = config.server.host
     if config.server.port:
         mcp.settings.port = config.server.port
+
+    # Allow the public host(s) the server is reached through (e.g. behind the
+    # Railway TLS proxy). MCP SDK 1.27.2 enables DNS-rebinding protection by
+    # default and otherwise rejects unknown Host headers with 421.
+    allowed = [h.strip() for h in os.environ.get('MCP_ALLOWED_HOSTS', '').split(',') if h.strip()]
+    if allowed:
+        mcp.settings.transport_security = TransportSecuritySettings(
+            enable_dns_rebinding_protection=True,
+            allowed_hosts=[v for h in allowed for v in (h, f'{h}:*')],
+            allowed_origins=[f'https://{h}' for h in allowed],
+        )
 
     # Return MCP configuration for transport
     return config.server
